@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ANATELLA version='1.94'>
+<GlobalParameters wDirLoc='0'>
+</GlobalParameters>
+<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAEAAAABf/wCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAABBAAABfwAAAHgA////AAAAAwAAB4AAAAIZ/AEAAAAC+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAAAAARhAAACPgD////8AAAEZQAAAxsAAAGXAP////oAAAABAQAAAAL7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAYAD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAABlwD///8AAAZ8AAABfwAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAAFAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABAAUgBUAG8AbwBsAGIAYQByAQAAAgv/////AAAAAAAAAAAAAAAaAFAAeQB0AGgAbwBuAFQAbwBvAGwAQgBhAHIBAAACPv////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAnH/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAABGD/////AAAAAAAAAAA=</WorkingSpace>
+<ACTIONS>
+<inlineTable idx='0' x='-192' y='-114'>
+<ColumnNames><c>Query</c><c>Anatella</c><c>spark-scala local-1CPU</c><c>spark-scala local-2CPU</c><c>spark-scala local-3CPU</c><c>spark-scala local-4CPU</c><c>spark-scala local-5CPU</c><c>spark-scala local-6CPU</c></ColumnNames>
+<Rows>
+ <r><c>Q1</c><c>27.14</c><c>183.59</c><c>99</c><c>80</c><c>74</c><c>63</c><c>60</c></r>
+ <r><c>Q2</c><c>5.719</c><c>956</c><c>792</c><c>751</c><c>700</c><c>720</c><c>1178</c></r>
+ <r><c>Q3</c><c>34.547</c><c>929</c><c>421</c><c>727</c><c>651</c><c>643</c><c>932</c></r>
+ <r><c>Q4</c><c>33.672</c><c>830</c><c>436</c><c>410</c><c>349</c><c>350</c><c>738</c></r>
+ <r><c>Q5</c><c>43.735</c><c>2275</c><c>1208</c><c>1123</c><c>994</c><c>994</c><c>1516</c></r>
+ <r><c>Q6</c><c>6.219</c><c>102</c><c>55</c><c>46</c><c>39</c><c>37</c><c>35</c></r>
+ <r><c>Q7</c><c>45.625</c><c>1113</c><c>955</c><c>879</c><c>852</c><c>831</c><c>810</c></r>
+ <r><c>Q8</c><c>49.281</c><c>1621</c><c>1312</c><c>1266</c><c>1147</c><c>1131</c><c>1124</c></r>
+ <r><c>Q9</c><c>200</c><c>2059</c><c>2064</c><c>1524</c><c>1389</c><c>1348</c><c>1366</c></r>
+ <r><c>Q10</c><c>38.937</c><c>1035</c><c>1854</c><c>805</c><c>756</c><c>766</c><c>758</c></r>
+ <r><c>Q11</c><c>4.234</c><c>441</c><c>365</c><c>359</c><c>338</c><c>320</c><c>329</c></r>
+ <r><c>Q12</c><c>47.734</c><c>454</c><c>349</c><c>334</c><c>306</c><c>301</c><c>299</c></r>
+ <r><c>Q13</c><c>105.578</c><c>377</c><c>256</c><c>204</c><c>203</c><c>185</c><c>182</c></r>
+ <r><c>Q14</c><c>3.219</c><c>373</c><c>317</c><c>322</c><c>451</c><c>295</c><c>286</c></r>
+ <r><c>Q15</c><c>9.719</c><c>error</c><c>error</c><c>593</c><c>error</c><c>568</c><c>563</c></r>
+ <r><c>Q16</c><c>31.39</c><c>839</c><c>698</c><c>671</c><c>647</c><c>643</c><c>637</c></r>
+ <r><c>Q17</c><c>26.734</c><c>1255</c><c>972</c><c>889</c><c>862</c><c>779</c><c>763</c></r>
+ <r><c>Q18</c><c>36.922</c><c>1135</c><c>943</c><c>857</c><c>814</c><c>802</c><c>785</c></r>
+ <r><c>Q19</c><c>44.14</c><c>972</c><c>331</c><c>312</c><c>295</c><c>290</c><c>287</c></r>
+ <r><c>Q20</c><c>21.734</c><c>972</c><c>803</c><c>744</c><c>732</c><c>737</c><c>698</c></r>
+ <r><c>Q21</c><c>127.703</c><c>3815</c><c>2976</c><c>2912</c><c>2629</c><c>2611</c><c>2469</c></r>
+ <r><c>Q22</c><c>44.515</c><c>206</c><c>153</c><c>153</c><c>140</c><c>130</c><c>128</c></r>
+</Rows>
+</inlineTable>
+<CalculatorVectorized module='MathParser' idx='5' x='74' y='-68'>
+  <InputVars>
+    <InputVar column='spark-scala local-1CPU' label='a'/>
+    <InputVar label='b'><c>spark-scala local-2CPU</c><c>spark-scala local-3CPU</c><c>spark-scala local-4CPU</c><c>spark-scala local-5CPU</c><c>spark-scala local-6CPU</c></InputVar>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='&quot;SpeedUp_&quot;//b'>a/b</OutputVar>
+  </OutputVars>
+</CalculatorVectorized>
+<Generic idx='6' x='206' y='-69' id='My_template'
+  orignalId='template'
+ deprecated='1'
+  longName='PercentageOfProcessThatIsNotParallelizable'
+  image='xx'
+  author='Frank Vanden Berghen'
+  revision='0.01'
+  pdfDestination='4_8_18_2_template'>
+<Description>
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:14px; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;compute the PercentageOfProcessThatIsNotParallelizable &amp;quot;s&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</Description>
+<Parameters>
+  <Parameter id='idSpeedup' text='speed up values' type='manycolumns'><meta>0</meta><data><c>SpeedUp_spark-scala local-2CPU</c><c>SpeedUp_spark-scala local-3CPU</c><c>SpeedUp_spark-scala local-4CPU</c><c>SpeedUp_spark-scala local-5CPU</c><c>SpeedUp_spark-scala local-6CPU</c></data></Parameter>
+</Parameters>
+<Script>
+var mr,observedSpeedUp;
+function parallelRun(v) { return true; }
+
+function init()
+{
+    var r=getCurrentRow();
+    if (!r.isNull) setOutputRowSize(0,r.nColumn+1);
+
+    mr=new Row(1);
+    rowSetColumnName(mr,0,"PercentageOfProcessThatIsNotParallelizable");
+    rowSetMetaType(mr,0,'F');
+
+    observedSpeedUp=new Array(idSpeedup.length+2);
+    observedSpeedUp[0]=0;
+    observedSpeedUp[1]=1;
+    return 0;
+}
+
+function myF(x)
+{
+    var error=0,AmdahlSpeedUp,i;
+    for(i=2;i&lt;observedSpeedUp.length;i++)
+    {
+        AmdahlSpeedUp=1/(x+(1-x)/i);
+        error+=Math.abs(AmdahlSpeedUp-observedSpeedUp[i]);
+    }
+    return error;    
+}
+
+function run()
+{
+    var r=getNextRow();
+    if (r.isNull) return 1;
+
+    r.write(); 
+
+    var i=idSpeedup.length,x;
+    while(i--)
+    {
+        x=toNumber(r.col(idSpeedup[i]));
+        if (x!==x) // NaN
+        {
+            mr.setColumn(0);
+            mr.write();
+            writeEOL();
+            return 0;
+        }
+        observedSpeedUp[i+2]=x;
+    }
+
+    var r=simpleGlobalOptimizer("myF",0,1,1000);
+
+    if ((myF(r.xOpt+0.01)&lt;r.yOpt)||
+        (myF(r.xOpt-0.01)&lt;r.yOpt)) print("error");
+
+    mr.setColumn(0,r.xOpt);
+    mr.write();
+    writeEOL();
+    return 0;
+}
+</Script>
+</Generic>
+<FilterRows module='MathParser' idx='7' x='-55' y='-118' comments='_n=5'>
+ <Expression>Query !="Q15"</Expression>
+ <InputVars>
+    <InputVar column='Query' isNumber='0'/>
+ </InputVars>
+</FilterRows>
+<Calculator module='MathParser' idx='8' x='355' y='-73'>
+  <InputVars>
+    <InputVar column='PercentageOfProcessThatIsNotParallelizable' meta='F'/>
+    <InputVar column='spark-scala local-1CPU' label='spark_scala_local_1CPU'/>
+    <InputVar column='Anatella'/>
+    <InputVar column='spark-scala local-6CPU' label='spark_scala_local_6CPU'/>
+    <InputVar column='spark-scala local-1CPU' label='spark_scala_local_1CPU'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='PercentageOfProcessThatIsParallelizable' isInput='1'>1-PercentageOfProcessThatIsNotParallelizable</OutputVar>
+    <OutputVar name='SequentialTime'>PercentageOfProcessThatIsNotParallelizable* spark_scala_local_1CPU</OutputVar>
+    <OutputVar name='AnatellaRunningTimeInPercent' isInput='1'>Anatella / spark_scala_local_1CPU</OutputVar>
+    <OutputVar name='AnatellaSpeedUp'>1/AnatellaRunningTimeInPercent</OutputVar>
+  </OutputVars>
+</Calculator>
+<Generic idx='13' x='207' y='-172' id='My_template'
+  orignalId='template'
+ deprecated='1'
+  longName='PercentageOfProcessThatIsNotParallelizable'
+  image='xx'
+  author='Frank Vanden Berghen'
+  revision='0.01'
+  pdfDestination='4_8_18_2_template'>
+<Description>
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:14px; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;compute the PercentageOfProcessThatIsNotParallelizable &amp;quot;s&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</Description>
+<Parameters>
+  <Parameter id='idSpeedup' text='percent exec time when cpu&gt;1' type='manycolumns'><meta>0</meta><data><c>PercentExecTime_spark-scala local-2CPU</c><c>PercentExecTime_spark-scala local-3CPU</c><c>PercentExecTime_spark-scala local-4CPU</c><c>PercentExecTime_spark-scala local-5CPU</c><c>PercentExecTime_spark-scala local-6CPU</c></data></Parameter>
+</Parameters>
+<Script>
+var mr,observedExecTimeInPerc;
+function parallelRun(v) { return true; }
+
+function init()
+{
+    var r=getCurrentRow();
+    if (!r.isNull) setOutputRowSize(0,r.nColumn+1);
+
+    mr=new Row(1);
+    rowSetColumnName(mr,0,"PercentageOfProcessThatIsNotParallelizable");
+    rowSetMetaType(mr,0,'F');
+
+    observedExecTimeInPerc=new Array(idSpeedup.length+2);
+    observedExecTimeInPerc[0]=0;
+    observedExecTimeInPerc[1]=1;
+    return 0;
+}
+
+function myF(x)
+{
+    var error=0,AmdahlExecTimeInPerc,i;
+    for(i=2;i&lt;observedExecTimeInPerc.length;i++)
+    {
+        AmdahlExecTimeInPerc=(x+(1-x)/i);
+        error+=Math.abs(AmdahlExecTimeInPerc-observedExecTimeInPerc[i]);
+    }
+    return error;    
+}
+
+function run()
+{
+    var r=getNextRow();
+    if (r.isNull) return 1;
+
+    r.write(); 
+
+    var i=idSpeedup.length,x;
+    while(i--)
+    {
+        x=toNumber(r.col(idSpeedup[i]));
+        if (x!==x) // NaN
+        {
+            mr.setColumn(0);
+            mr.write();
+            writeEOL();
+            return 0;
+        }
+        observedExecTimeInPerc[i+2]=x;
+    }
+
+    var r=simpleGlobalOptimizer("myF",0,1,1000);
+
+    if ((myF(r.xOpt+0.01)&lt;r.yOpt)||
+        (myF(r.xOpt-0.01)&lt;r.yOpt)) print("error");
+
+    mr.setColumn(0,r.xOpt);
+    mr.write();
+    writeEOL();
+    return 0;
+}
+</Script>
+</Generic>
+<CalculatorVectorized module='MathParser' idx='14' x='71' y='-173'>
+  <InputVars>
+    <InputVar column='spark-scala local-1CPU' label='a'/>
+    <InputVar label='b'><c>spark-scala local-2CPU</c><c>spark-scala local-3CPU</c><c>spark-scala local-4CPU</c><c>spark-scala local-5CPU</c><c>spark-scala local-6CPU</c></InputVar>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='&quot;PercentExecTime_&quot;//b'>b/a</OutputVar>
+  </OutputVars>
+</CalculatorVectorized>
+<FilterRows keyHD='155208866217416205' module='MathParser' idx='18' x='485' y='11'>
+ <Expression>AnatellaRunningTimeInPercent >  PercentageOfProcessThatIsNotParallelizable</Expression>
+ <InputVars>
+    <InputVar column='PercentageOfProcessThatIsNotParallelizable' meta='F'/>
+    <InputVar column='AnatellaRunningTimeInPercent' meta='F'/>
+ </InputVars>
+</FilterRows>
+<FilterRows keyHD='155208866117416098' module='MathParser' idx='19' x='479' y='-250'>
+ <Expression>AnatellaRunningTimeInPercent >  PercentageOfProcessThatIsNotParallelizable</Expression>
+ <InputVars>
+    <InputVar column='PercentageOfProcessThatIsNotParallelizable' meta='F'/>
+    <InputVar column='AnatellaRunningTimeInPercent' meta='F'/>
+ </InputVars>
+</FilterRows>
+<Calculator module='MathParser' idx='21' x='352' y='-172'>
+  <InputVars>
+    <InputVar column='PercentageOfProcessThatIsNotParallelizable' meta='F'/>
+    <InputVar column='spark-scala local-1CPU' label='spark_scala_local_1CPU'/>
+    <InputVar column='Anatella'/>
+    <InputVar column='spark-scala local-6CPU' label='spark_scala_local_6CPU'/>
+    <InputVar column='spark-scala local-1CPU' label='spark_scala_local_1CPU'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='PercentageOfProcessThatIsParallelizable' isInput='1'>1-PercentageOfProcessThatIsNotParallelizable</OutputVar>
+    <OutputVar name='SequentialTime'>PercentageOfProcessThatIsNotParallelizable* spark_scala_local_1CPU</OutputVar>
+    <OutputVar name='AnatellaRunningTimeInPercent' isInput='1'>Anatella / spark_scala_local_1CPU</OutputVar>
+    <OutputVar name='AnatellaSpeedUp'>1/AnatellaRunningTimeInPercent</OutputVar>
+  </OutputVars>
+</Calculator>
+</ACTIONS>
+<CONNECTORS>
+<Connection idxSrc='5' idxDest='6'/>
+<Connection idxSrc='0' idxDest='7'/>
+<Connection idxSrc='7' idxDest='5'/>
+<Connection idxSrc='6' idxDest='8'/>
+<Connection idxSrc='7' idxDest='14'/>
+<Connection idxSrc='14' idxDest='13'/>
+<Connection idxSrc='8' idxDest='18'/>
+<Connection idxSrc='13' idxDest='21'/>
+<Connection idxSrc='21' idxDest='19'/>
+</CONNECTORS>
+<TEXTANNOTATIONS>
+  <Annotation x='594' y='15' size='10' anchor='18'>&lt;- check if there exists a query where the spark runtime on an 
+     infinte number of CPU&apos;s is smaller than the Anatella run-time
+     (this should be an empty table)</Annotation>
+  <Annotation x='580' y='-249' size='10' anchor='19'>&lt;- check if there exists a query where the spark runtime on an 
+     infinte number of CPU&apos;s is smaller than the Anatella run-time
+     (this should be an empty table)</Annotation>
+  <Annotation x='180' y='11' size='10'>Compute the incompressible 
+run-time &quot;s&quot; using two different 
+expressions of the Amdahl&apos;s 
+law.
+</Annotation>
+</TEXTANNOTATIONS>
+<GROUPBOXANNOTATIONS>
+</GROUPBOXANNOTATIONS>
+</ANATELLA>

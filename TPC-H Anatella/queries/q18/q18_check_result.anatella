@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ANATELLA version='1.92'>
+<GlobalParameters wDirLoc='0' dataDirRead=':/../../../answers' dataDirWrite=':/..'>
+</GlobalParameters>
+<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAEAAAADS/wCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAABFAAADSwAAAHgA////AAAAAwAACgAAAAGi/AEAAAAC+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAAAAAJfAAACEgD////8AAACZAAAB5wAAAHaAP////oAAAABAQAAAAL7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAcgD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAAB2gD///8AAAj7AAADSwAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAAFAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABAAUgBUAG8AbwBsAGIAYQByAQAAAhr/////AAAAAAAAAAAAAAAaAFAAeQB0AGgAbwBuAFQAbwBvAGwAQgBhAHIBAAACT/////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAoT/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAABK//////AAAAAAAAAAA=</WorkingSpace>
+<ACTIONS>
+<readCSV keyHD='155076673166084697' idx='0' x='-880.147' y='-167.675' sep='|' fillInEOL='0' fileName=':/../../../answers/q18.out'/>
+<readCSV keyHD='155076671366084321' idx='1' x='-729.147' y='-304.675' sep=',' fillInEOL='0' fileName='q18_out.txt'/>
+<ColumnRename module='DefaultActions' idx='3' x='-729.147' y='-171.675' caseMode='1'><before>
+<c>o_orderdat</c></before><after>
+<c>o_orderdate</c></after>
+<QuickRename ></QuickRename>
+</ColumnRename>
+<Generic keyHD='155076674666084416' idx='4' x='-519.147' y='-304.675' id='validate'
+  longName='validate'
+  nPinIn='2'
+  le='1496494323150'
+  image='validate.png'
+  author='Frank Vanden Berghen'
+  revision='0.23'
+  tags='200_Cleaning'
+  pdfDestination='5_6_3_table_validate'>
+<Description>
+&lt;html&gt;
+This operator compares the 2 tables given on the 2 input pins.&lt;br/&gt;
+Only the selected columns will be compared.&lt;br/&gt;
+&lt;br/&gt;
+The output of this operator is one unique row that contains: 
+&lt;ul&gt;
+&lt;li&gt;In the first column: the user-supplied &quot;short description&quot; of the performed test.&lt;/li&gt;
+&lt;li&gt;In the second column: 
+&lt;ul&gt;
+&lt;li&gt;If the comparison is successful (i.e. the selected columns of the 2 tables matches), then you obtain, the string &quot;OK&quot;.&lt;/li&gt;
+&lt;li&gt;If the comparison failed, then you obtain a short description of the &quot;mismatch&quot;.&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;
+&lt;/ul&gt;
+</Description>
+<Parameters>
+  <Parameter id='columnsToTestS' text='Columns to validate (Strings or Unknowns)' type='manycolumns'><meta>-1</meta><data><c>C_NAME</c><c>O_ORDERDATE</c></data></Parameter>
+  <Parameter id='columnsToTestN' text='Columns to validate (Numbers)' type='manycolumns'><meta>-1</meta><data><c>C_CUSTKEY</c><c>O_ORDERKEY</c><c>O_TOTALPRICE</c><c>COL6</c></data></Parameter>
+  <Parameter id='tn' text='Treshold when comparing 2 numbers' type='string'>1e-5</Parameter>
+  <Parameter id='testName' text='A short description of the test performed' type='string'>q18 Comparison check</Parameter>
+  <Parameter id='idAbort' text='Abort execution on Error?' type='bool'>0</Parameter>
+  <Parameter id='idRelaxedNull' text='Treat NULL as the same as a Zero-Length String' type='bool'>1</Parameter>
+</Parameters>
+<Script>
+var nRow;
+var idxVarsRefN,idxVarsRefS;
+var idxVarsTestN,idxVarsTestS;
+
+function outputARow(message)
+{
+       if ((message!="OK")&amp;&amp;idAbort)
+       {
+            throw message;
+       }
+       var r=new Row(2);
+       rowSetColumnName(r,0,"Test Name");
+       rowSetColumnName(r,1,"Result");
+       r.setColumn(0,testName);
+       r.setColumn(1,message);
+       r.write();
+       writeEOL();
+}
+
+function init()
+{
+   if (columnsToTestN.length+columnsToTestS.length==0) throw("No Column to validate??");
+   nRow=1;
+   var r0=getCurrentRow(0);
+   var r1=getCurrentRow(1);
+   idxVarsRefN=rowGetIndexOfColumn(r0,columnsToTestN);
+   idxVarsTestN=rowGetIndexOfColumn(r1,columnsToTestN);
+   idxVarsRefS=rowGetIndexOfColumn(r0,columnsToTestS);
+   idxVarsTestS=rowGetIndexOfColumn(r1,columnsToTestS);
+   if (columnsToTestN.length>0)
+   {
+      if (idxVarsRefN.length==0) throw("''Number column'' not found in reference");
+      if (idxVarsTestN.length==0) throw("''Number column'' not found in test");
+   } else
+   {
+        idxVarsRefN=new Array();
+        idxVarsTestN=new Array();
+   }
+
+   if (columnsToTestS.length>0)
+   {
+        if (idxVarsRefS.length==0) throw("''String column'' not found in reference");
+        if (idxVarsTestS.length==0) throw("''String column'' not found in test");
+   }
+
+   var ii=idxVarsRefS.length;
+   while(ii--)
+   {
+       i=idxVarsRefS[ii];
+       if (rowGetMetaType(r0,i)=='F')
+       {
+            idxVarsRefN.push(i);
+            idxVarsTestN.push(idxVarsTestS[ii]);
+            idxVarsRefS.splice(ii,1);
+            idxVarsTestS.splice(ii,1);
+       }
+   }
+   setOutputRowSize(0,2);
+   tn=Number(tn);
+   return 0;
+}
+
+function run()
+{
+   var rRef=getNextRow(0);
+   var rTest=getNextRow(1);
+   if (rRef.isNull &amp;&amp; rTest.isNull)
+   {
+       outputARow("OK");
+       return 1;
+   }
+   if (rRef.isNull)
+   {
+       outputARow("ERROR: test table is to long (more than "+nRow+" rows");
+       return 1;
+   }
+   if (rTest.isNull)
+   {
+       outputARow("ERROR: test table is too short");
+       return 1;
+   }
+
+   var i,a,b,an,bn,ii;
+   for(i=0;i&lt;idxVarsRefS.length;i++)
+   {
+ //       cr=rRef.col(idxVarsRefS[i]);
+//       ct=rTest.col(idxVarsTestS[i]);
+//        if (!(cr==ct))
+        if (!(rRef.col(idxVarsRefS[i])==rTest.col(idxVarsTestS[i])))
+        {
+             if (idRelaxedNull)
+             {
+                    a=rRef.col(idxVarsRefS[i]);
+                    b=rTest.col(idxVarsTestS[i]);
+                    if (((a==null)&amp;&amp;(b==""))||((b==null)&amp;&amp;(a=="")))
+                        continue;
+             }
+             ii=idxVarsRefS[i];
+             a=rRef.col(idxVarsRefS[i]);
+             b=rTest.col(idxVarsTestS[i]);
+             outputARow("ERROR: Mismatch on row "+nRow+", col '"+rowGetColumnName(rRef,ii)+"': Ref= '"+a+"'(len="+(a==null?"n/a":a.length)+
+                          ") Test='"+b+"'(len="+(b==null?"n/a":b.length)+")");
+             return 1;
+        }
+   }
+   for(i=0;i&lt;idxVarsRefN.length;i++)
+   {
+        a=rRef.col(idxVarsRefN[i]);
+        b=rTest.col(idxVarsTestN[i]);
+        if (((a==null)&amp;&amp;(b!=null))||((b==null)&amp;&amp;(a!=null)))
+        {
+             if (idRelaxedNull)
+             {
+                    if (((a==null)&amp;&amp;(b==""))||((b==null)&amp;&amp;(a=="")))
+                        continue;
+             }
+             outputARow("ERROR: Mismatch on row "+nRow+", col '"+rowGetColumnName(rRef,ii)+"': Ref= '"+a+
+                          "' Test='"+b+"'");
+             return 1;
+        }
+        an=Number(a);
+        bn=Number(b);
+        if ((Math.abs(an-bn)/(1+Math.max(Math.abs(an),Math.abs(bn))))>tn)
+        {
+             ii=idxVarsRefN[i];
+             outputARow("ERROR: Mismatch on row "+nRow+", col '"+rowGetColumnName(rRef,ii)+"': Ref= '"+a+
+                          "' Test='"+b+"'");
+             return 1;
+        }
+   }
+   nRow++;
+   return 0;
+}
+</Script>
+</Generic>
+<RunToFinishLine idx='5' x='304' y='-452'/>
+<FilterRows module='MathParser' idx='9' x='-324' y='-448'>
+ <Expression>contains( Test_Name , "q18")</Expression>
+ <InputVars>
+    <InputVar column='Test Name' label='Test_Name' isNumber='0'/>
+ </InputVars>
+</FilterRows>
+<readCSV idx='12' x='-521' y='-449' sep=',' fillInEOL='0' fileName=':/../result_check.txt'/>
+<writeCSV idx='13' x='107' y='-451' sep=',' segmentSize='0.1' filename=':/../result_check.txt'/>
+<sort idx='16' x='-16' y='-450' action='S' maxNTape='0'>
+  <field type='A'>Test Name</field>
+</sort>
+<Append module='DefaultActions' idx='17' x='-143' y='-451' output='0'>
+  </Append>
+<Calculator module='MathParser' idx='19' x='-345.245' y='-304.269'>
+  <InputVars>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='Comment' meta='U'>_nullS</OutputVar>
+  </OutputVars>
+</Calculator>
+</ACTIONS>
+<CONNECTORS>
+<Connection idxSrc='0' idxDest='3'/>
+<Connection idxSrc='3' idxDest='4' idxPinIn='1'/>
+<Connection idxSrc='1' idxDest='4'/>
+<Connection idxSrc='13' idxDest='5'/>
+<Connection idxSrc='16' idxDest='13'/>
+<Connection idxSrc='9' idxDest='17' idxPinOut='1'/>
+<Connection idxSrc='17' idxDest='16'/>
+<Connection idxSrc='12' idxDest='9'/>
+<Connection idxSrc='4' idxDest='19'/>
+<Connection idxSrc='19' idxDest='17' idxPinIn='1'/>
+</CONNECTORS>
+<TEXTANNOTATIONS>
+  <Annotation x='-878.147' y='-197.675' size='16'>ANSWER</Annotation>
+  <Annotation x='-721.147' y='-350.084' size='16'>RESULT</Annotation>
+</TEXTANNOTATIONS>
+<GROUPBOXANNOTATIONS>
+</GROUPBOXANNOTATIONS>
+</ANATELLA>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ANATELLA version='1.93'>
+<GlobalParameters wDirLoc='0' dataDirRead='D:/tpc-h-mona/tpc-h_v4/1GB_anatella/lineitem_cgel_split' fileParameterDir='C:\Users\Mona\Desktop\tpc-h-mona\tpc-h_v2\tables_anatella\lineitem_split' otherDir='C:/projects/TPC-H-Benchmarck-Anatella-Spark-/TPC-H Anatella/import'>
+<Parameters>
+<Par name='DATA_SIZE'>1</Par>
+</Parameters>
+</GlobalParameters>
+<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAEAAAAA4vwCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAABBAAAA4gAAAHgA////AAAAAwAABPcAAAFd/AEAAAAC+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAAAAAL5AAACYAD////8AAAC/QAAAfoAAAGXAP////oAAAAAAQAAAAL7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAYAD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAABlwD///8AAAPzAAAA4gAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAAFAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABAAUgBUAG8AbwBsAGIAYQByAQAAAgv/////AAAAAAAAAAAAAAAaAFAAeQB0AGgAbwBuAFQAbwBvAGwAQgBhAHIBAAACPv////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAnH/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAABGD/////AAAAAAAAAAA=</WorkingSpace>
+<ACTIONS>
+<RunToFinishLine idx='1' x='-828.677' y='-400.85'/>
+<parallelRun idx='23' x='-992.831' y='-402.642' maxConcurrentRun='4' abort='1' nRetry='3'>
+<RunData><anatellaGraph>:/import_21_customer_cgel.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/import_22_lineitem_cgel.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/import_23_nation_cgel.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/import_24_orders_cgel.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/import_25_part_cgel.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/import_26_partsupp_cgel.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/import_27_region_cgel.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/import_28_supplier_cgel.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+</parallelRun>
+</ACTIONS>
+<CONNECTORS>
+<Connection idxSrc='23' idxDest='1'/>
+</CONNECTORS>
+<TEXTANNOTATIONS>
+</TEXTANNOTATIONS>
+<GROUPBOXANNOTATIONS>
+</GROUPBOXANNOTATIONS>
+</ANATELLA>

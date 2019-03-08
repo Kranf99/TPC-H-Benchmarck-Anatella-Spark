@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ANATELLA version='1.94'>
+<GlobalParameters wDirLoc='1' dataDirRead=':/' dataDirWrite=':/' otherDir='C:/projects/TPC-H-Benchmarck-Anatella-Spark-/TPC-H Anatella/queries/q12_s'>
+<Parameters>
+<Par name='DATA_SIZE'>1</Par>
+</Parameters>
+</GlobalParameters>
+<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAJAAAACQPwCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAABBAAACQAAAAHgA////AAAAAwAAB4AAAAFY/AEAAAAC+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAAAAAQGAAAB0gD////8AAAECgAAA3YAAAGXAP////oAAAAAAQAAAAL7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAABlwD////7AAAADgBMAG8AZwBEAG8AYwBrAQAAAwQAAAODAAAAYAD///8AAAU8AAACQAAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAAFAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABAAUgBUAG8AbwBsAGIAYQByAQAAAgv/////AAAAAAAAAAAAAAAaAFAAeQB0AGgAbwBuAFQAbwBvAGwAQgBhAHIBAAACPv////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAnH/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAABGD/////AAAAAAAAAAA=</WorkingSpace>
+<ACTIONS>
+<parallelRun idx='0' x='-64.4096' y='-73.7734' maxConcurrentRun='1' abort='1' displayLogSubGraphs='1' getPeakMem='1'>
+<RunData><anatellaGraph>:/q1/q1.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q2/q2.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q3/q3.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q4/q4.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q5/q5.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q6_s/q6s.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q7_s/q7s.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q8/q8.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q9/q9.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q10/q10.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q11/q11.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q12_s/q12s.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q13/q13.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q14_s/q14s.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q15_s/q15s.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q16/q16.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q17/q17.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q18/q18.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q19/q19.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q20_s/q20s.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q21/q21s.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+<RunData><anatellaGraph>:/q22/q22.anatella</anatellaGraph><parameters>&gt;&quot;-DDATA_SIZE=&quot; + DATA_SIZE + &quot; -s&quot;</parameters></RunData>
+</parallelRun>
+<RunToFinishLine idx='1' x='346.952' y='-281.311' nPinIn='39'/>
+<inlineTable idx='2' x='68.1799' y='-279.08'>
+<ColumnNames><c>Names</c><c>Values</c></ColumnNames>
+<Rows>
+ <r><c>DATA_SIZE</c><c>1</c></r>
+</Rows>
+</inlineTable>
+<Generic idx='3' x='207.571' y='-277.08' id='setGlobalParameters'
+  longName='set the value of some global Parameters'
+  le='1438699377232'
+  image='/setGlobalParameters.png'
+  author='Frank Vanden Berghen'
+  revision='0.08'
+  tags='800_Other'>
+<Description>
+&lt;html&gt;
+Set the value of some Global Parameters.&lt;br /&gt;&lt;br /&gt;
+The input table contains 2 columns:&lt;ol&gt;
+&lt;li&gt;The name of the Global Parameters to set.&lt;/li&gt;
+&lt;li&gt;The new value of the Global Parameter.&lt;/li&gt;&lt;/ol&gt;
+If the second column is omitted, the Global Parameter is reset to an empty string.&lt;br /&gt;
+&lt;br /&gt;
+The behavior is:&lt;ol&gt;
+&lt;li&gt;NEW: Set or Update all Global Paramaters and then continue. The input table is not forwarded to the ouput.&lt;/li&gt;
+&lt;li&gt;OLD: Set one Global Paramaters and directly forward the input row to the ouput&lt;/li&gt;&lt;/ol&gt;
+</Description>
+<Parameters>
+  <Parameter id='parName' text='The Global Parameter Names' type='onecolumn'><meta>0</meta><data>Names</data></Parameter>
+  <Parameter id='parValue' text='The Global Parameter Values' type='onecolumn'><meta>0</meta><data>Values</data></Parameter>
+  <Parameter id='setOnlyIfEmpty' text='Only set value if Global Parameter is empty' type='bool'>0</Parameter>
+  <Parameter id='behavior' text='Behavior' type='combobox'><meta>&lt;i&gt;New Behavior&lt;/i&gt;&lt;i&gt;Old Behavior&lt;/i&gt;</meta><data>0</data></Parameter>
+</Parameters>
+<Script>
+function init()
+{
+    if (behavior==0) return 0;
+    var r=getCurrentRow();
+    if (!r.isNull) setOutputRowSize(0,r.nColumn);
+    return 0;
+}
+
+function setGP(name,r)
+{
+    if (parValue&lt;0)
+    {
+        var assign=new Function(name+"=\"\";");
+        assign();
+    } else
+    {
+        var t=""+r.col(parValue);
+        t=t.replace(new RegExp("\\\\", 'g'), "\\\\");
+        t=t.replace(new RegExp("\"", 'g'), "\\\"");
+        t=t.replace(new RegExp("\n", 'g'), "");
+        t=t.replace(new RegExp("\r", 'g'), "");
+        t=name+"=\""+t+"\";"
+        var assign=new Function(t);
+        assign();
+    }
+}
+
+function setGP2(r)
+{
+   var name=r.col(parName);
+    var testIfExists=new Function("return typeof("+name+");");
+    if (testIfExists()=="undefined") { newGlobalVar(name); setGP(name,r); return;  }
+    if (!setOnlyIfEmpty) { setGP(name,r); return; }
+    var getValue=new Function("return "+name+";");
+    if (getValue()!="") setGP(name,r);
+}
+
+function run()
+{
+    if (behavior==0)
+    {
+        for(;;)
+        {
+            var r=getNextRow();
+            if (r.isNull) return 1;
+            if (userAskedAbort()) return 1;
+            setGP2(r);
+        }
+    }
+    
+    var r=getNextRow();
+    if (r.isNull) return 1;
+    r.write(); 
+    writeEOL();
+    setGP2(r);
+    return 0;
+}
+</Script>
+</Generic>
+<parallelRun idx='5' x='214.559' y='111.887' maxConcurrentRun='1' abort='1'>
+<RunData><anatellaGraph>:/q1/q1_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q2/q2_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q3/q3_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q4/q4_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q5/q5_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q6_s/q6_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q7_s/q7_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q8/q8_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q9/q9_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q10/q10_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q11/q11_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q12_s/q12_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q13/q13_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q14_s/q14_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q15_s/q15_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q16/q16_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q17/q17_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q18/q18_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q19/q19_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q20_s/q20_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q21/q21_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+<RunData><anatellaGraph>:/q22/q22_check_result.anatella</anatellaGraph><parameters>-s</parameters></RunData>
+</parallelRun>
+<writeCSV idx='7' x='205.883' y='-181.407' sep=',' segmentSize='0.1' filename=':/result_check.txt'/>
+<inlineTable idx='8' x='71.2369' y='-183.154'>
+<ColumnNames><c>Test Name</c><c>Result</c><c>Comment</c></ColumnNames>
+<Rows>
+ <r><c></c><c></c><c></c></r>
+</Rows>
+</inlineTable>
+<readCSV keyHD='155204851918084941' idx='9' x='481.02' y='111.844' sep=',' fillInEOL='0' fileName=':/result_check.txt'/>
+<sort idx='10' x='62.6926' y='-75.2151' action='S'>
+  <field type='9'>ExecutionTime</field>
+</sort>
+<Generic idx='18' x='63.1073' y='15.7889' id='transpose'
+  longName='transpose the full table'
+  le='1404836334296'
+  image='/transpose.png'
+  author='Frank Vanden Berghen'
+  revision='0.05'
+  tags='800_Other'
+  pdfDestination='5_21_2_transpose'>
+<Description>
+Transpose the full table. Only work for SMALL tables since the whole table is loaded into RAM.
+</Description>
+<Parameters>
+  <Parameter id='firstColContainsColName' text='first Column Contains Column Names' type='bool'>1</Parameter>
+  <Parameter id='hasToCreateColumn' text='Create a column with the (old) column names' type='bool'>0</Parameter>
+  <Parameter id='colPrefix' text='prefix column name' type='string'></Parameter>
+</Parameters>
+<Script>
+function fullTableRequiredToComputeMetas(idxPinIn) { return true; }
+var rowIdx,nRows,myRow,fullTable;
+
+function init()
+{
+    fullTable=new Array();
+    rowIdx=0;
+    return 0;
+}
+
+function run()
+{
+    if (rowIdx==0)
+    {
+        var r;
+        for(;;)
+        {
+            r=getNextRow();
+            if (r.isNull) break;
+            fullTable.push(rowDeepCopy(r));
+        }
+        var i=0,n=fullTable.length,base=0;
+        if (!n) return 1;
+        nRows=fullTable[0].nColumn;
+        if (hasToCreateColumn) { i=1; n++; base=1; }
+        setOutputRowSize(0,n);
+        myRow=new Row(n);
+        if (firstColContainsColName)
+        {
+            rowIdx=1;
+            for(;i&lt;n;i++)
+                 rowSetColumnName(myRow,i,colPrefix+fullTable[i-base].col(0)); 
+        } else
+        {
+            for(;i&lt;n;i++)
+                 rowSetColumnName(myRow,i,colPrefix+"C"+(i+1)); 
+        }
+        if (hasToCreateColumn) 
+        {
+            if (firstColContainsColName) rowSetColumnName(myRow,0,rowGetColumnName(fullTable[0],0));
+            else rowSetColumnName(myRow,0,"OldColumnNames");
+        }
+    }
+    var i=0,n=fullTable.length,base=0;
+    if (hasToCreateColumn)
+    {
+        myRow.setColumn(0,rowGetColumnName(fullTable[0],rowIdx));
+         i=1; n++; base=1;
+    }
+    for(;i&lt;n;i++)
+        myRow.setColumn(i,fullTable[i-base].col(rowIdx));
+    myRow.write(); 
+    writeEOL();
+    rowIdx++;
+    if (rowIdx==nRows) return 1;
+    return 0;
+}
+</Script>
+</Generic>
+<writeExcel module='WriteReport' idx='21' x='204.844' y='-79.0519' fileNameDestination=':/results.xlsx'/>
+<readExcel keyHD='155204856318084286' module='WriteReport' idx='22' x='479' y='-78' fileName=':/results.xlsx'/>
+<aggregate keyHD='155204843918084787' idx='23' x='608' y='-78'>
+ <OneAggregate>
+  <GroupBy>
+  </GroupBy>
+  <OutputVars>
+   <v name='ExecutionTime' sum='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+</ACTIONS>
+<CONNECTORS>
+<Connection idxSrc='2' idxDest='3'/>
+<Connection idxSrc='3' idxDest='1'/>
+<Connection idxSrc='8' idxDest='7'>
+  <Point x='194.883' y='-169.323'/>
+</Connection>
+<Connection idxSrc='0' idxDest='10'/>
+<Connection idxSrc='0' idxDest='18'/>
+<Connection idxSrc='10' idxDest='21'/>
+<Connection idxSrc='7' idxDest='1' idxPinIn='8'/>
+<Connection idxSrc='21' idxDest='1' idxPinIn='17'/>
+<Connection idxSrc='5' idxDest='1' idxPinIn='33'/>
+<Connection idxSrc='22' idxDest='23'/>
+</CONNECTORS>
+<TEXTANNOTATIONS>
+  <Annotation x='63.3322' y='-323.239' size='16' anchor='2'>DATA_SIZE</Annotation>
+  <Annotation x='-150.27' y='-53.8634' size='12' anchor='0'>queries</Annotation>
+  <Annotation x='109.443' y='139.036' size='12' anchor='5'>check_result</Annotation>
+</TEXTANNOTATIONS>
+<GROUPBOXANNOTATIONS>
+</GROUPBOXANNOTATIONS>
+</ANATELLA>

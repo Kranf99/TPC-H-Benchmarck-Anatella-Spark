@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ANATELLA version='1.94'>
+<GlobalParameters wDirLoc='0' dataDirRead='F:/TIMi/tpc-h/v0/answers' dataDirWrite=':/'>
+<Parameters>
+<Par name='DATA_SIZE'>1000</Par>
+<Par name='NATION'>SAUDI ARABIA</Par>
+<Par name='SUPPKEYMAX'>999979</Par>
+<Par name='OSTATUS'>0</Par>
+</Parameters>
+</GlobalParameters>
+<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAFpAAAB+/wCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAABBAAAB+wAAAHgA////AAAAAwAAB4AAAAGd/AEAAAAC+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAAAAARqAAACPwD////8AAAEbgAAAxIAAAGXAP////oAAAABAQAAAAL7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAYAD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAABlwD///8AAAYTAAAB+wAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAAFAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABAAUgBUAG8AbwBsAGIAYQByAQAAAgv/////AAAAAAAAAAAAAAAaAFAAeQB0AGgAbwBuAFQAbwBvAGwAQgBhAHIBAAACPv////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAnH/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAABGD/////AAAAAAAAAAA=</WorkingSpace>
+<ACTIONS>
+<ReadColumnarGel module='MathParser' idx='209' x='5193.98' y='1215.31' columnSelection='1' fileName='&gt;&quot;:/../../&quot; + DATA_SIZE + &quot;GB_anatella/supplier.cgel_anatella&quot;'>
+ <ColumnsToRead>
+  <c>S_SUPPKEY</c><c>S_NATIONKEY</c><c>S_NAME</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<ReadColumnarGel module='MathParser' idx='210' x='5647.18' y='809.414' columnSelection='1' fileName='&gt;&quot;:/../../&quot; + DATA_SIZE + &quot;GB_anatella/lineitem.cgel_anatella&quot;'>
+ <ColumnsToRead>
+  <c>L_ORDERKEY</c><c>L_SUPPKEY</c><c>L_RECEIPTDATE_ET</c><c>L_COMMITDATE_ET</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<aggregate idx='214' x='4778.46' y='1705.17'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='L_ORDERKEY' type='0'/>
+  </GroupBy>
+  <OutputVars>
+   <v name='L_SUPPKEY' imax='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<ColumnRename module='DefaultActions' idx='215' x='4915.64' y='1705.12'><before>
+<c>L_SUPPKEY_dmax</c><c>count</c></before><after>
+<c>L_SUPPKEY_max2</c><c>L_SUPPKEY_count2</c></after>
+<QuickRename ></QuickRename>
+</ColumnRename>
+<ReadColumnarGel module='MathParser' idx='216' x='5403.87' y='912.991' columnSelection='1' fileName='&gt;&quot;:/../../&quot; + DATA_SIZE + &quot;GB_anatella/orders.cgel_anatella&quot;'>
+ <ColumnsToRead>
+  <c>O_ORDERKEY</c><c>O_ORDERSTATUS_INDEX</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<FilterRows module='MathParser' idx='217' x='5533.7' y='914.921'>
+ <Expression>O_ORDERSTATUS ==  2</Expression>
+ <InputVars>
+    <InputVar column='O_ORDERSTATUS_INDEX' label='O_ORDERSTATUS' meta='K' value='2.64819e-320'/>
+ </InputVars>
+</FilterRows>
+<ReadColumnarGel module='MathParser' idx='218' x='5046.45' y='1325.06' columnSelection='1' fileName='&gt;&quot;:/../../&quot; + DATA_SIZE + &quot;GB_anatella/nation.cgel_anatella&quot;'>
+ <ColumnsToRead>
+  <c>N_NATIONKEY</c><c>N_NAME</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<FilterRows module='MathParser' idx='219' x='5192.57' y='1322.72'>
+ <Expression>N_NAME == NATION</Expression>
+ <InputVars>
+    <InputVar column='N_NAME' isNumber='0'/>
+ </InputVars>
+</FilterRows>
+<Join module='DefaultActions' idx='227' x='5066.91' y='1497.98' joinMode='0' keyA='L_ORDERKEY' new='1'>
+<SlaveKeys><c>L_ORDERKEY</c><c>L_ORDERKEY</c></SlaveKeys>
+<Prefixes><c></c><c></c><c></c></Prefixes>
+</Join>
+<aggregate idx='235' x='5354.42' y='1497.75' inRAMAlgo='1'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='S_NAME' type='0'/>
+  </GroupBy>
+  <OutputVars>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<ColumnRename module='DefaultActions' idx='236' x='5504.19' y='1497.87'><before>
+<c>count</c></before><after>
+<c>numwait</c></after>
+<QuickRename ></QuickRename>
+</ColumnRename>
+<sort idx='237' x='5643.72' y='1500.38' action='S'>
+  <field type='9'>numwait</field>
+  <field type='A'>S_NAME</field>
+</sort>
+<aggregate idx='261' x='5642.09' y='1099.96'>
+ <OneAggregate>
+  <GroupBy>
+  </GroupBy>
+  <OutputVars>
+   <v name='L_SUPPKEY' imax='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<MultiJoin module='DefaultActions' idx='265' x='5487.72' y='1097.68'>
+  <Join pin='1' mainKey='L_SUPPKEY' slaveKey='S_SUPPKEY' prefix='' copyAll='0' inner='1'>
+  <c>S_NAME</c>
+  </Join>
+</MultiJoin>
+<Generic idx='269' x='5933.75' y='1101.89' id='setGlobalParameters'
+  longName='set the value of some global Parameters'
+  le='1438699377232'
+  image='/setGlobalParameters.png'
+  author='Frank Vanden Berghen'
+  revision='0.08'
+  tags='800_Other'>
+<Description>
+&lt;html&gt;
+Set the value of some Global Parameters.&lt;br /&gt;&lt;br /&gt;
+The input table contains 2 columns:&lt;ol&gt;
+&lt;li&gt;The name of the Global Parameters to set.&lt;/li&gt;
+&lt;li&gt;The new value of the Global Parameter.&lt;/li&gt;&lt;/ol&gt;
+If the second column is omitted, the Global Parameter is reset to an empty string.&lt;br /&gt;
+&lt;br /&gt;
+The behavior is:&lt;ol&gt;
+&lt;li&gt;NEW: Set or Update all Global Paramaters and then continue. The input table is not forwarded to the ouput.&lt;/li&gt;
+&lt;li&gt;OLD: Set one Global Paramaters and directly forward the input row to the ouput&lt;/li&gt;&lt;/ol&gt;
+</Description>
+<Parameters>
+  <Parameter id='parName' text='The Global Parameter Names' type='onecolumn'><meta>0</meta><data>Name</data></Parameter>
+  <Parameter id='parValue' text='The Global Parameter Values' type='onecolumn'><meta>0</meta><data>L_SUPPKEY_dmax</data></Parameter>
+  <Parameter id='setOnlyIfEmpty' text='Only set value if Global Parameter is empty' type='bool'>0</Parameter>
+  <Parameter id='behavior' text='Behavior' type='combobox'><meta>&lt;i&gt;New Behavior&lt;/i&gt;&lt;i&gt;Old Behavior&lt;/i&gt;</meta><data>0</data></Parameter>
+</Parameters>
+<Script>
+function init()
+{
+    if (behavior==0) return 0;
+    var r=getCurrentRow();
+    if (!r.isNull) setOutputRowSize(0,r.nColumn);
+    return 0;
+}
+
+function setGP(name,r)
+{
+    if (parValue&lt;0)
+    {
+        var assign=new Function(name+"=\"\";");
+        assign();
+    } else
+    {
+        var t=""+r.col(parValue);
+        t=t.replace(new RegExp("\\\\", 'g'), "\\\\");
+        t=t.replace(new RegExp("\"", 'g'), "\\\"");
+        t=t.replace(new RegExp("\n", 'g'), "");
+        t=t.replace(new RegExp("\r", 'g'), "");
+        t=name+"=\""+t+"\";"
+        var assign=new Function(t);
+        assign();
+    }
+}
+
+function setGP2(r)
+{
+   var name=r.col(parName);
+    var testIfExists=new Function("return typeof("+name+");");
+    if (testIfExists()=="undefined") { newGlobalVar(name); setGP(name,r); return;  }
+    if (!setOnlyIfEmpty) { setGP(name,r); return; }
+    var getValue=new Function("return "+name+";");
+    if (getValue()!="") setGP(name,r);
+}
+
+function run()
+{
+    if (behavior==0)
+    {
+        for(;;)
+        {
+            var r=getNextRow();
+            if (r.isNull) return 1;
+            if (userAskedAbort()) return 1;
+            setGP2(r);
+        }
+    }
+    
+    var r=getNextRow();
+    if (r.isNull) return 1;
+    r.write(); 
+    writeEOL();
+    setGP2(r);
+    return 0;
+}
+</Script>
+</Generic>
+<RunToFinishLine idx='273' x='6091.45' y='501.575' nPinIn='88'/>
+<FilterRows module='MathParser' idx='275' x='5799.74' y='1499.27' truncate='1'>
+ <Expression>_n &lt; 100</Expression>
+ <InputVars>
+ </InputVars>
+</FilterRows>
+<writeCSV idx='276' x='5939.72' y='1501.38' sep=',' segmentSize='0.1' filename='q21_out.txt'/>
+<ReadColumnarGel module='MathParser' idx='277' x='4313.84' y='1591.9' columnSelection='1' fileName='&gt;&quot;:/../../&quot; + DATA_SIZE + &quot;GB_anatella/lineitem.cgel_anatella&quot;'>
+ <ColumnsToRead>
+  <c>L_ORDERKEY</c><c>L_SUPPKEY</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<ReadColumnarGel module='MathParser' idx='278' x='4215.76' y='1700.67' columnSelection='1' fileName='&gt;&quot;:/../../&quot; + DATA_SIZE + &quot;GB_anatella/lineitem.cgel_anatella&quot;'>
+ <ColumnsToRead>
+  <c>L_ORDERKEY</c><c>L_SUPPKEY</c><c>L_RECEIPTDATE_ET</c><c>L_COMMITDATE_ET</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<FilterRows module='MathParser' idx='279' x='4504.63' y='1703.77'>
+ <Expression>r>c</Expression>
+ <InputVars>
+    <InputVar column='L_RECEIPTDATE_ET' label='r' meta='K'/>
+    <InputVar column='L_COMMITDATE_ET' label='c' meta='K'/>
+ </InputVars>
+</FilterRows>
+<FilterOnKey module='DefaultActions' idx='280' x='5335.48' y='1202.38' slaveKey='N_NATIONKEY'>
+  <c>S_NATIONKEY</c></FilterOnKey>
+<Join module='DefaultActions' idx='281' x='5803.24' y='815.341' joinMode='1' keyA='L_ORDERKEY' new='1'>
+<SlaveKeys><c>O_ORDERKEY</c></SlaveKeys>
+<Prefixes><c></c><c></c></Prefixes>
+</Join>
+<SelectColumns module='DefaultActions' idx='291' x='5665.92' y='913.991' keep='1'>
+ <c>O_ORDERKEY</c>
+</SelectColumns>
+<FilterRows module='MathParser' idx='293' x='5340.58' y='1098.41'>
+ <Expression>r>c</Expression>
+ <InputVars>
+    <InputVar column='L_RECEIPTDATE_ET' label='r' meta='K'/>
+    <InputVar column='L_COMMITDATE_ET' label='c' meta='K'/>
+ </InputVars>
+</FilterRows>
+<aggregate idx='296' x='4631.29' y='1596.14'>
+ <OneAggregate>
+  <GroupBy>
+   <v name='L_ORDERKEY' type='0'/>
+   <v name='L_SUPPKEY' type='0'/>
+  </GroupBy>
+  <OutputVars>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<aggregate idx='297' x='4768.13' y='1597.97'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='L_ORDERKEY' type='0'/>
+  </GroupBy>
+  <OutputVars>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<ColumnRename module='DefaultActions' idx='298' x='4903.15' y='1599.62'><before>
+<c>count</c></before><after>
+<c>L_SUPPKEY_count</c></after>
+<QuickRename ></QuickRename>
+</ColumnRename>
+<aggregate idx='301' x='4632.67' y='1702.57'>
+ <OneAggregate>
+  <GroupBy>
+   <v name='L_ORDERKEY' type='0'/>
+   <v name='L_SUPPKEY' type='0'/>
+  </GroupBy>
+  <OutputVars>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<InsertKey module='DefaultActions' idx='302' x='5784.7' y='1098.1' insertKey='0' startCount='0' columnName='Key'>
+  <c name='Name' value='SUPPKEYMAX' type='U'/>
+</InsertKey>
+<FilterRows module='MathParser' idx='305' x='5215.01' y='1500'>
+ <Expression>count2==1 &amp;&amp; key == max2 &amp;&amp; key != SUPPKEYMAX &amp;&amp;
+(count>1 || (count == 1 &amp;&amp; key == SUPPKEYMAX))</Expression>
+ <InputVars>
+    <InputVar column='L_SUPPKEY_count2' label='count2'/>
+    <InputVar column='L_SUPPKEY_max2' label='max2' meta='K'/>
+    <InputVar column='L_SUPPKEY' label='key' meta='K'/>
+    <InputVar column='L_SUPPKEY_count' label='count'/>
+ </InputVars>
+</FilterRows>
+<writeGel idx='306' x='5952.58' y='814.301' nThread='3' file=':/temp.gel_anatella'/>
+<readGel idx='307' x='5191.18' y='1098' nBlockForward='2' fileName=':/temp.gel_anatella'/>
+<readGel idx='308' x='4476.58' y='1597.11' nBlockForward='2' fileName=':/temp.gel_anatella'/>
+<readGel idx='309' x='4367.55' y='1702.21' nBlockForward='2' fileName=':/temp.gel_anatella'/>
+<readCSV keyHD='155204824415532368' idx='310' x='5853.32' y='1604' sep=',' fillInEOL='0' fileName='q21_out.txt'/>
+<inlineTable idx='313' x='5577.29' y='511.771'>
+<ColumnNames><c>Names</c><c>Target</c></ColumnNames>
+<Rows>
+ <r><c>OSTATUS</c><c>F</c></r>
+</Rows>
+</inlineTable>
+<readGel idx='314' x='5583.7' y='609.517' fileName='&gt;&quot;:/../../&quot; + DATA_SIZE + &quot;GB_anatella/orders_orderstatus_index_conversion.gel_anatella&quot;'/>
+<MultiJoin module='DefaultActions' idx='315' x='5731.3' y='513.568'>
+  <Join pin='1' mainKey='Target' slaveKey='O_ORDERSTATUS' prefix=''>
+    </Join>
+</MultiJoin>
+<Generic idx='316' x='5864.1' y='509.51' id='setGlobalParameters'
+  longName='set the value of some global Parameters'
+  le='1438699377232'
+  image='/setGlobalParameters.png'
+  author='Frank Vanden Berghen'
+  revision='0.08'
+  tags='800_Other'>
+<Description>
+&lt;html&gt;
+Set the value of some Global Parameters.&lt;br /&gt;&lt;br /&gt;
+The input table contains 2 columns:&lt;ol&gt;
+&lt;li&gt;The name of the Global Parameters to set.&lt;/li&gt;
+&lt;li&gt;The new value of the Global Parameter.&lt;/li&gt;&lt;/ol&gt;
+If the second column is omitted, the Global Parameter is reset to an empty string.&lt;br /&gt;
+&lt;br /&gt;
+The behavior is:&lt;ol&gt;
+&lt;li&gt;NEW: Set or Update all Global Paramaters and then continue. The input table is not forwarded to the ouput.&lt;/li&gt;
+&lt;li&gt;OLD: Set one Global Paramaters and directly forward the input row to the ouput&lt;/li&gt;&lt;/ol&gt;
+</Description>
+<Parameters>
+  <Parameter id='parName' text='The Global Parameter Names' type='onecolumn'><meta>0</meta><data>Names</data></Parameter>
+  <Parameter id='parValue' text='The Global Parameter Values' type='onecolumn'><meta>0</meta><data>O_ORDERSTATUS_INDEX</data></Parameter>
+  <Parameter id='setOnlyIfEmpty' text='Only set value if Global Parameter is empty' type='bool'>0</Parameter>
+  <Parameter id='behavior' text='Behavior' type='combobox'><meta>&lt;i&gt;New Behavior&lt;/i&gt;&lt;i&gt;Old Behavior&lt;/i&gt;</meta><data>0</data></Parameter>
+</Parameters>
+<Script>
+function init()
+{
+    if (behavior==0) return 0;
+    var r=getCurrentRow();
+    if (!r.isNull) setOutputRowSize(0,r.nColumn);
+    return 0;
+}
+
+function setGP(name,r)
+{
+    if (parValue&lt;0)
+    {
+        var assign=new Function(name+"=\"\";");
+        assign();
+    } else
+    {
+        var t=""+r.col(parValue);
+        t=t.replace(new RegExp("\\\\", 'g'), "\\\\");
+        t=t.replace(new RegExp("\"", 'g'), "\\\"");
+        t=t.replace(new RegExp("\n", 'g'), "");
+        t=t.replace(new RegExp("\r", 'g'), "");
+        t=name+"=\""+t+"\";"
+        var assign=new Function(t);
+        assign();
+    }
+}
+
+function setGP2(r)
+{
+   var name=r.col(parName);
+    var testIfExists=new Function("return typeof("+name+");");
+    if (testIfExists()=="undefined") { newGlobalVar(name); setGP(name,r); return;  }
+    if (!setOnlyIfEmpty) { setGP(name,r); return; }
+    var getValue=new Function("return "+name+";");
+    if (getValue()!="") setGP(name,r);
+}
+
+function run()
+{
+    if (behavior==0)
+    {
+        for(;;)
+        {
+            var r=getNextRow();
+            if (r.isNull) return 1;
+            if (userAskedAbort()) return 1;
+            setGP2(r);
+        }
+    }
+    
+    var r=getNextRow();
+    if (r.isNull) return 1;
+    r.write(); 
+    writeEOL();
+    setGP2(r);
+    return 0;
+}
+</Script>
+</Generic>
+<readCSV keyHD='155204822315532042' idx='317' x='5973' y='1602.04' sep='|' fillInEOL='0' fileName=':/../../../answers/q21.out'/>
+</ACTIONS>
+<CONNECTORS>
+<Connection idxSrc='214' idxDest='215'/>
+<Connection idxSrc='216' idxDest='217'/>
+<Connection idxSrc='218' idxDest='219'/>
+<Connection idxSrc='236' idxDest='237'/>
+<Connection idxSrc='235' idxDest='236'/>
+<Connection idxSrc='237' idxDest='275'/>
+<Connection idxSrc='275' idxDest='276'/>
+<Connection idxSrc='209' idxDest='280'/>
+<Connection idxSrc='219' idxDest='280' idxPinIn='1'/>
+<Connection idxSrc='280' idxDest='265' idxPinIn='1'/>
+<Connection idxSrc='215' idxDest='227' idxPinIn='2'/>
+<Connection idxSrc='210' idxDest='281'/>
+<Connection idxSrc='217' idxDest='291'/>
+<Connection idxSrc='291' idxDest='281' idxPinIn='1'/>
+<Connection idxSrc='296' idxDest='297'/>
+<Connection idxSrc='297' idxDest='298'/>
+<Connection idxSrc='298' idxDest='227' idxPinIn='1'/>
+<Connection idxSrc='279' idxDest='301'/>
+<Connection idxSrc='301' idxDest='214'/>
+<Connection idxSrc='261' idxDest='302'/>
+<Connection idxSrc='302' idxDest='269'/>
+<Connection idxSrc='227' idxDest='305'/>
+<Connection idxSrc='305' idxDest='235'/>
+<Connection idxSrc='281' idxDest='306'/>
+<Connection idxSrc='307' idxDest='293'/>
+<Connection idxSrc='308' idxDest='296'/>
+<Connection idxSrc='309' idxDest='279'/>
+<Connection idxSrc='276' idxDest='273' idxPinIn='83'/>
+<Connection idxSrc='306' idxDest='273' idxPinIn='26'/>
+<Connection idxSrc='269' idxDest='273' idxPinIn='50'/>
+<Connection idxSrc='265' idxDest='261'/>
+<Connection idxSrc='265' idxDest='227'>
+  <Point x='5537.18' y='1444.75'/>
+  <Point x='5092.54' y='1466.17'/>
+</Connection>
+<Connection idxSrc='293' idxDest='265'/>
+<Connection idxSrc='313' idxDest='315'/>
+<Connection idxSrc='314' idxDest='315' idxPinIn='1'/>
+<Connection idxSrc='315' idxDest='316'/>
+<Connection idxSrc='316' idxDest='273'/>
+</CONNECTORS>
+<TEXTANNOTATIONS>
+  <Annotation x='5190.36' y='1178.06' size='16' anchor='209'>SUPPLIER</Annotation>
+  <Annotation x='5641.68' y='754.054' size='16' anchor='210'>LINEITEM</Annotation>
+  <Annotation x='5403.81' y='864.452' size='16' anchor='216'>ORDERS</Annotation>
+  <Annotation x='5058.08' y='1286.31' size='16' anchor='218'>NATION</Annotation>
+  <Annotation x='4932.35' y='1556.01' size='16' anchor='298'>line1</Annotation>
+  <Annotation x='4935.9' y='1785.7' size='16' anchor='215'>line2</Annotation>
+  <Annotation x='5805.37' y='761.096' size='16'>flineitem</Annotation>
+  <Annotation x='4347.84' y='1558.9' size='16' anchor='277'>plineitem</Annotation>
+  <Annotation x='5495.35' y='1046.47' size='20' anchor='265'>inner join</Annotation>
+  <Annotation x='4210.46' y='1791.39' size='16' anchor='278'>plineitem</Annotation>
+</TEXTANNOTATIONS>
+<GROUPBOXANNOTATIONS>
+  <Groupbox x='5543.94' y='498.221' w='453.056' h='206.063' color='#afeeee'/>
+</GROUPBOXANNOTATIONS>
+</ANATELLA>

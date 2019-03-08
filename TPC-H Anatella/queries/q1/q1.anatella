@@ -1,0 +1,947 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ANATELLA version='1.94'>
+<GlobalParameters wDirLoc='0' dataDirRead='F:/TIMi/tpc-h/v2/answers' dataDirWrite='C:/Projects/TPC-H-Benchmarck-Anatella-Spark-/TPC-H Anatella/queries/q1' fileParameterDir='F:\TIMi\tpc-h\v2\TPC-H Anatella\10GB_anatella\lineitem_cgel_split'>
+<Parameters>
+<Par name='DATA_SIZE'>1</Par>
+<Par name='DATE'>3897</Par>
+<Par name='DELTA'>90</Par>
+</Parameters>
+</GlobalParameters>
+<WorkingSpace>AAAA/wAAAAD9AAAAAgAAAAEAAAEAAAAB0fwCAAAAAfsAAAAcAEEAbABsAEEAYwB0AGkAbwBuAHMARABvAGMAawEAAABBAAAB0QAAAHgA////AAAAAwAAB4AAAAHH/AEAAAAC+wAAACgAQQBjAHQAaQBvAG4AUAByAG8AcABlAHIAdABpAGUAcwBEAG8AYwBrAQAAAAAAAAUVAAAB9AD////8AAAFGQAAAmcAAAGXAP////oAAAABAQAAAAL7AAAADgBMAG8AZwBEAG8AYwBrAQAAAAD/////AAAAYAD////7AAAAGgBEAGEAdABhAFQAYQBiAGwAZQBEAG8AYwBrAQAAAAD/////AAABlwD///8AAAZ8AAAB0QAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAAFAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAABAAUgBUAG8AbwBsAGIAYQByAQAAAgv/////AAAAAAAAAAAAAAAaAFAAeQB0AGgAbwBuAFQAbwBvAGwAQgBhAHIBAAACPv////8AAAAAAAAAAAAAABYAdABlAHgAdABUAG8AbwBsAEIAYQByAQAAAnH/////AAAAAAAAAAAAAAAeAGcAcgBvAHUAcABCAG8AeABUAG8AbwBsAEIAYQByAQAABGD/////AAAAAAAAAAA=</WorkingSpace>
+<ACTIONS>
+<readCSV idx='2' x='-63.3201' y='157.248' sep=',' fillInEOL='0' fileName='q1_out.txt'/>
+<writeCSV idx='3' x='141.663' y='-63.0362' sep=',' segmentSize='0.1' filename='q1_out.txt'/>
+<Generic idx='4' x='109.832' y='-273.417' id='setGlobalParameters'
+  longName='set the value of some global Parameters'
+  le='1438699377232'
+  image='/setGlobalParameters.png'
+  author='Frank Vanden Berghen'
+  revision='0.08'
+  tags='800_Other'>
+<Description>
+&lt;html&gt;
+Set the value of some Global Parameters.&lt;br /&gt;&lt;br /&gt;
+The input table contains 2 columns:&lt;ol&gt;
+&lt;li&gt;The name of the Global Parameters to set.&lt;/li&gt;
+&lt;li&gt;The new value of the Global Parameter.&lt;/li&gt;&lt;/ol&gt;
+If the second column is omitted, the Global Parameter is reset to an empty string.&lt;br /&gt;
+&lt;br /&gt;
+The behavior is:&lt;ol&gt;
+&lt;li&gt;NEW: Set or Update all Global Paramaters and then continue. The input table is not forwarded to the ouput.&lt;/li&gt;
+&lt;li&gt;OLD: Set one Global Paramaters and directly forward the input row to the ouput&lt;/li&gt;&lt;/ol&gt;
+</Description>
+<Parameters>
+  <Parameter id='parName' text='The Global Parameter Names' type='onecolumn'><meta>0</meta><data>Names</data></Parameter>
+  <Parameter id='parValue' text='The Global Parameter Values' type='onecolumn'><meta>0</meta><data>Values</data></Parameter>
+  <Parameter id='setOnlyIfEmpty' text='Only set value if Global Parameter is empty' type='bool'>0</Parameter>
+  <Parameter id='behavior' text='Behavior' type='combobox'><meta>&lt;i&gt;New Behavior&lt;/i&gt;&lt;i&gt;Old Behavior&lt;/i&gt;</meta><data>0</data></Parameter>
+</Parameters>
+<Script>
+function init()
+{
+    if (behavior==0) return 0;
+    var r=getCurrentRow();
+    if (!r.isNull) setOutputRowSize(0,r.nColumn);
+    return 0;
+}
+
+function setGP(name,r)
+{
+    if (parValue&lt;0)
+    {
+        var assign=new Function(name+"=\"\";");
+        assign();
+    } else
+    {
+        var t=""+r.col(parValue);
+        t=t.replace(new RegExp("\\\\", 'g'), "\\\\");
+        t=t.replace(new RegExp("\"", 'g'), "\\\"");
+        t=t.replace(new RegExp("\n", 'g'), "");
+        t=t.replace(new RegExp("\r", 'g'), "");
+        t=name+"=\""+t+"\";"
+        var assign=new Function(t);
+        assign();
+    }
+}
+
+function setGP2(r)
+{
+   var name=r.col(parName);
+    var testIfExists=new Function("return typeof("+name+");");
+    if (testIfExists()=="undefined") { newGlobalVar(name); setGP(name,r); return;  }
+    if (!setOnlyIfEmpty) { setGP(name,r); return; }
+    var getValue=new Function("return "+name+";");
+    if (getValue()!="") setGP(name,r);
+}
+
+function run()
+{
+    if (behavior==0)
+    {
+        for(;;)
+        {
+            var r=getNextRow();
+            if (r.isNull) return 1;
+            if (userAskedAbort()) return 1;
+            setGP2(r);
+        }
+    }
+    
+    var r=getNextRow();
+    if (r.isNull) return 1;
+    r.write(); 
+    writeEOL();
+    setGP2(r);
+    return 0;
+}
+</Script>
+</Generic>
+<FilterRows module='MathParser' idx='6' x='-1862.59' y='-60.7681'>
+ <Expression>L_SHIPDATE_ET  &lt;= DATE</Expression>
+ <InputVars>
+    <InputVar column='L_SHIPDATE_ET' meta='K'/>
+ </InputVars>
+</FilterRows>
+<Calculator module='MathParser' idx='8' x='-43.659' y='-273.881' elapsedTimeUnit='3' referenceTime='19880101 00:00:00' dateFormat='yyyy-MM-dd'>
+  <InputVars>
+    <InputVar column='Values' label='d' isNumber='0'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='Values' meta='K' update='1'>toET(dateAdd(d,0,0,-DELTA))</OutputVar>
+  </OutputVars>
+</Calculator>
+<ColumnRename module='DefaultActions' idx='12' x='-548.388' y='-61.9439'><before>
+<c>L_QUANTITY</c><c>L_EXTENDEDPRICE</c><c>DISC_PRICE</c><c>CHARGE</c><c>count</c></before><after>
+<c>SUM_QTY</c><c>SUM_BASE_PRICE</c><c>SUM_DISC_PRICE</c><c>SUM_CHARGE</c><c>COUNT_ORDER</c></after>
+<QuickRename ></QuickRename>
+</ColumnRename>
+<ChangeDataType idx='14' x='-134.805' y='-62.1918' floatToString='%5.3f'>
+<toStringFromFloat><c>SUM_QTY</c><c>SUM_BASE_PRICE</c><c>SUM_DISC_PRICE</c><c>SUM_CHARGE</c><c>AVG_QTY</c><c>AVG_PRICE</c><c>AVG_DISC</c></toStringFromFloat>
+</ChangeDataType>
+<Calculator module='MathParser' idx='15' x='-0.719' y='-62.0377'>
+  <InputVars>
+    <InputVar column='SUM_QTY' isNumber='0'/>
+    <InputVar column='SUM_BASE_PRICE' isNumber='0'/>
+    <InputVar column='SUM_DISC_PRICE' isNumber='0'/>
+    <InputVar column='SUM_CHARGE' isNumber='0'/>
+    <InputVar column='AVG_QTY' isNumber='0'/>
+    <InputVar column='AVG_PRICE' isNumber='0'/>
+    <InputVar column='AVG_DISC' isNumber='0'/>
+    <InputVar column='COUNT_ORDER' meta='F'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='SUM_QTY' meta='U' update='1'>left( SUM_QTY , strlen( SUM_QTY  ) - 1)</OutputVar>
+    <OutputVar name='SUM_BASE_PRICE' meta='U' update='1'>left(  SUM_BASE_PRICE  , strlen(  SUM_BASE_PRICE   ) - 1)</OutputVar>
+    <OutputVar name='SUM_DISC_PRICE' meta='U' update='1'>left(   SUM_DISC_PRICE   , strlen(   SUM_DISC_PRICE    ) - 1)</OutputVar>
+    <OutputVar name='SUM_CHARGE' meta='U' update='1'>left(    SUM_CHARGE    , strlen(    SUM_CHARGE     ) - 1)</OutputVar>
+    <OutputVar name='AVG_QTY' meta='U' update='1'>left(AVG_QTY , strlen(AVG_QTY ) - 1)</OutputVar>
+    <OutputVar name='AVG_PRICE' meta='U' update='1'>left( AVG_PRICE  , strlen( AVG_PRICE  ) - 1)</OutputVar>
+    <OutputVar name='AVG_DISC' meta='U' update='1'>left(  AVG_DISC   , strlen(  AVG_DISC   ) - 1)</OutputVar>
+    <OutputVar name='COUNT_ORDER' meta='U' update='1'>itoa(COUNT_ORDER)</OutputVar>
+  </OutputVars>
+</Calculator>
+<Generic idx='16' x='-284.478' y='-60.7288' id='numberFormatter'
+  longName='numberFormatter'
+  image='/numberFormatter.png'
+  author='Frank Vanden Berghen'
+  revision='0.02'
+  tags='500_Formatter'
+  pdfDestination='5_17_3_number_formatter'>
+<Description>
+Format the numbers so that they are pretty.
+</Description>
+<Parameters>
+  <Parameter id='idxToFormat' text='columns with number to format' type='manycolumns'><meta>0</meta><data><c>SUM_QTY</c><c>SUM_BASE_PRICE</c><c>SUM_DISC_PRICE</c><c>SUM_CHARGE</c><c>AVG_QTY</c><c>AVG_PRICE</c><c>AVG_DISC</c></data></Parameter>
+  <Parameter id='nDecimalDigit' text='number of decimal digit' type='double'>2</Parameter>
+  <Parameter id='dropZero' text='remove null decimal part' type='bool'>0</Parameter>
+</Parameters>
+<Script>
+function parallelRun(v) { return true; }
+
+function init()
+{
+    var r=getCurrentRow();
+    if (!r.isNull) setOutputRowSize(0,r.nColumn);
+    if (nDecimalDigit==0) dropZero=false;
+    return 0;
+}
+
+function run()
+{
+    var r=getNextRow();
+    if (r.isNull) return 1;
+   
+    var i,ii,n=idxToFormat.length,v,u;
+    for (i=0;i&lt;n;i++)
+    {
+        ii=idxToFormat[i];
+        v=Number(r.col(ii)).toFixed(nDecimalDigit);
+        if (dropZero)
+        {
+              u=Math.round(v);
+              if (u==v) v=u;
+         }
+         r.setColumn(ii,v);
+    }
+    r.write(); 
+    writeEOL();
+    return 0;
+}
+</Script>
+</Generic>
+<RunToFinishLine idx='23' x='309.027' y='-289.092' nPinIn='23'/>
+<SelectColumns module='DefaultActions' idx='42' x='-421.193' y='-63.289' keep='1'>
+ <c>L_RETURNFLAG</c>
+ <c>L_LINESTATUS</c>
+ <c>SUM_QTY</c>
+ <c>SUM_BASE_PRICE</c>
+ <c>SUM_DISC_PRICE</c>
+ <c>SUM_CHARGE</c>
+ <c>AVG_QTY</c>
+ <c>AVG_PRICE</c>
+ <c>AVG_DISC</c>
+ <c>COUNT_ORDER</c>
+</SelectColumns>
+<sort idx='43' x='-827.621' y='-60.2025' action='S' tapeSize='300' maxNTape='0'>
+  <field type='A'>L_RETURNFLAG</field>
+  <field type='A'>L_LINESTATUS</field>
+</sort>
+<aggregate idx='61' x='-1601.14' y='-60.5948' inRAMAlgo='1' omitSuffix='1'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='L_RETURNFLAG_INDEX' type='0'/>
+   <v name='L_LINESTATUS_INDEX' type='0'/>
+  </GroupBy>
+  <OutputVars>
+   <v name='L_QUANTITY' sum='1'/>
+   <v name='L_EXTENDEDPRICE' sum='1'/>
+   <v name='DISC_PRICE' sum='1'/>
+   <v name='CHARGE' sum='1'/>
+   <v name='L_DISCOUNT' sum='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<MultiJoin module='DefaultActions' idx='68' x='-961.212' y='-61.9549' nPinIn='3'>
+  <Join pin='1' mainKey='L_LINESTATUS_INDEX' slaveKey='L_LINESTATUS_INDEX' prefix=''>
+    </Join>
+  <Join pin='2' mainKey='L_RETURNFLAG_INDEX' slaveKey='L_RETURNFLAG_INDEX' prefix=''>
+    </Join>
+</MultiJoin>
+<readGel idx='74' x='-1096' y='43' fileName='&gt;&quot;:/../../&quot; + DATA_SIZE + &quot;GB_anatella/lineitem_linestatus_index_conversion.gel_anatella&quot;'/>
+<readGel idx='75' x='-1095' y='179' fileName='&gt;&quot;:/../../&quot; + DATA_SIZE + &quot;GB_anatella/lineitem_returnflag_index_conversion.gel_anatella&quot;'/>
+<inlineTable idx='76' x='-190.844' y='-273.145'>
+<ColumnNames><c>Names</c><c>Values</c></ColumnNames>
+<Rows>
+ <r><c>DATE</c><c>1998-12-01</c></r>
+</Rows>
+</inlineTable>
+<RowCounter idx='77' x='-1614.21' y='-108.513' label='CounterID_78'/>
+<ReadColumnarGel module='MathParser' idx='78' x='-1992.55' y='-61.9733' fileNameFromPin='1' columnSelection='1' fileName='F:/TIMi/tpc-h/v2/TPC-H Anatella/10GB_anatella/lineitem_cgel_split/lineitem_1992-01-02.cgel_anatella'>
+ <ColumnsToRead>
+  <c>L_QUANTITY</c><c>L_EXTENDEDPRICE</c><c>L_DISCOUNT</c><c>L_TAX</c><c>L_SHIPDATE_ET</c><c>L_RETURNFLAG_INDEX</c><c>L_LINESTATUS_INDEX</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<Generic keyHD='155204370304724123' idx='80' x='-2328.55' y='-65.9733' id='listFiles'
+  longName='List Files inside directory'
+  nPinIn='0'
+  nPinInMin='0'
+  le='1501371033733'
+  image='/listFiles.png'
+  author='Frank Vanden Berghen'
+  revision='0.10'
+  tags='600_System Tools'
+  pdfDestination='5_19_4_list_files'>
+<Description>
+List the files inside a user-defined directory
+</Description>
+<Parameters>
+  <Parameter id='myFileFilter' text='file filter' type='string'>*.cgel_anatella</Parameter>
+  <Parameter id='myDir' text='directory to list' type='onedir'><data>&gt; &quot;:/../../&quot;+DATA_SIZE+&quot;GB_anatella/lineitem_cgel_split&quot;</data></Parameter>
+  <Parameter id='myOutput' text='output' type='combobox'><meta>&lt;i&gt;All files sorted by name&lt;/i&gt;&lt;i&gt;All files sorted by time&lt;/i&gt;&lt;i&gt;All files sorted by size&lt;/i&gt;&lt;i&gt;First file (by name)&lt;/i&gt;&lt;i&gt;First file (by time)&lt;/i&gt;&lt;i&gt;First file (by size)&lt;/i&gt;&lt;i&gt;Last file (by name)&lt;/i&gt;&lt;i&gt;Last file (by time)&lt;/i&gt;&lt;i&gt;Last file (by size)&lt;/i&gt;</meta><data>0</data></Parameter>
+  <Parameter id='myDateFormat' text='date time format' type='string'>yyyy-MM-dd hh:mm:ss</Parameter>
+  <Parameter id='getFileSizes' text='get file sizes' type='bool'>1</Parameter>
+  <Parameter id='recurse' text='recurse in (sub)directories?' type='bool'>0</Parameter>
+  <Parameter id='idItemType' text='Items to output' type='combobox'><meta>&lt;i&gt;Files&lt;/i&gt;&lt;i&gt;Directories&lt;/i&gt;&lt;i&gt;File and directories&lt;/i&gt;</meta><data>0</data></Parameter>
+  <Parameter id='nothingFound' text='if no files are found:' type='combobox'><meta>&lt;i&gt;return an empty table&lt;/i&gt;&lt;i&gt;abort anatella process with a warning&lt;/i&gt;&lt;i&gt;abort anatella process with an error&lt;/i&gt;</meta><data>0</data></Parameter>
+</Parameters>
+<Script>
+var r,a,i,formatter,dirsToProcess,sm,isEmpty,itemTypes;
+
+function addDirToProcess(d)
+{
+    var thisDirs=dirList(d,"",DirSort_DoNotSort,DirFilter_AllDirs|DirFilter_NoDotAndDotDot);
+    if (thisDirs==null) return;
+    var i=thisDirs.length;
+    if (d[d.length-1]=='/') d=d.substr(0,d.length-1);
+    while(i--) dirsToProcess.push(d+"/"+thisDirs[i].fileName)
+}
+
+function initA()
+{
+    i=0;
+    if (!a.length) return;
+    switch(myOutput)
+    {
+    case 3: case 4: case 5: a=[a[0]]; return;
+    case 6: case 7: case 8: a=[a[a.length-1]]; return;
+    }
+}
+
+function init()
+{
+    isEmpty=true;
+    var n=10+(getFileSizes?1:0);
+    setOutputRowSize(0,n);
+    r=new Row(n);
+    rowSetColumnName(r,0,"filePath");
+    rowSetColumnName(r,1,"fileName");
+    rowSetColumnName(r,2,"created");
+    rowSetColumnName(r,3,"modified");
+    rowSetColumnName(r,4,"lastAccessed");
+    rowSetColumnName(r,5,"absolutePath");
+    rowSetColumnName(r,6,"isHidden");
+    rowSetColumnName(r,7,"isReadable");
+    rowSetColumnName(r,8,"isWritable");
+    rowSetColumnName(r,9,"isExecutable");
+    if (getFileSizes) rowSetColumnName(r,10,"size");
+
+    switch(myOutput)
+    {
+    case 0: case 3: case 6: sm=DirSort_ByName+DirSort_IgnoreCase; break;
+    case 1: case 4: case 7: sm=DirSort_ByTime; break;
+    case 2: case 5: case 8: sm=DirSort_BySize; break;
+    }
+
+    if (myFileFilter.indexOf("**")>=0) recurse=false;
+    if (recurse) 
+    {
+        if (myFileFilter.indexOf("*")>=0)  
+        {
+            myFileFilter=myFileFilter.replace("*","**");
+            recurse=false;
+        } else
+        {
+            dirsToProcess=new Array();
+            addDirToProcess(myDir);
+        }
+    }
+
+    switch(idItemType)
+    {
+    case 0: itemTypes=DirFilter_Files; break;
+    case 1: itemTypes=DirFilter_Dirs+DirFilter_NoDot+DirFilter_NoDotDot ; break;
+    case 2: itemTypes=DirFilter_Files+DirFilter_Dirs+DirFilter_NoDot+DirFilter_NoDotDot ; break;
+    }
+
+    a=dirList(myDir,myFileFilter,sm,itemTypes,getFileSizes);
+    initA(a)
+    formatter=new DateTool(myDateFormat);
+    return 0;
+}
+
+function processEnd()
+{
+    if (!isEmpty) return;
+    switch(nothingFound)
+    {
+    case 1: exit(1);
+    case 2: exit(2);
+    }
+}
+
+function run()
+{
+    if (i==a.length) 
+    {
+        if (!recurse) { processEnd(); return 1; }
+        do
+        {
+            if (!dirsToProcess.length) { processEnd(); return 1; }
+            var d=dirsToProcess.pop();
+            addDirToProcess(d);
+            a=dirList(d,myFileFilter,sm,itemTypes);
+        } while(!a.length);
+        initA(a);
+    }
+    isEmpty=false;
+    var s=a[i].absolutePath;
+    if (s[s.length-1]!='/') s+="/";
+    r.setColumn(0,s+a[i].fileName);
+    r.setColumn(1,a[i].fileName);
+    r.setColumn(2,formatter.print(a[i].created));
+    r.setColumn(3,formatter.print(a[i].modified));
+    r.setColumn(4,formatter.print(a[i].lastRead));
+    r.setColumn(5,a[i].absolutePath);
+    r.setColumn(6,a[i].isHidden?1:0);
+    r.setColumn(7,a[i].isReadable?1:0);
+    r.setColumn(8,a[i].isWritable?1:0);
+    r.setColumn(9,a[i].isExecutable?1:0);
+    if (getFileSizes) r.setColumn(10,a[i].size);
+    i++;
+    r.write(); 
+    writeEOL();
+    return 0;
+}
+</Script>
+</Generic>
+<ReadColumnarGel module='MathParser' idx='85' x='-1994.55' y='37.0267' fileNameFromPin='1' columnSelection='1' fileName='F:/TIMi/tpc-h/v2/TPC-H Anatella/10GB_anatella/lineitem_cgel_split/lineitem_1992-01-02.cgel_anatella'>
+ <ColumnsToRead>
+  <c>L_QUANTITY</c><c>L_EXTENDEDPRICE</c><c>L_DISCOUNT</c><c>L_TAX</c><c>L_SHIPDATE_ET</c><c>L_RETURNFLAG_INDEX</c><c>L_LINESTATUS_INDEX</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<FilterRows module='MathParser' idx='86' x='-1867.55' y='39.0267'>
+ <Expression>L_SHIPDATE_ET  &lt;= DATE</Expression>
+ <InputVars>
+    <InputVar column='L_SHIPDATE_ET' meta='K'/>
+ </InputVars>
+</FilterRows>
+<Append module='DefaultActions' idx='89' x='-1252.55' y='-60.9733' check='0' nPinIn='6'>
+  <c>L_RETURNFLAG_INDEX</c><c>L_LINESTATUS_INDEX</c><c>count</c><c>L_QUANTITY</c><c>L_EXTENDEDPRICE</c><c>DISC_PRICE</c><c>CHARGE</c><c>L_DISCOUNT</c></Append>
+<MultithreadRun idx='90' x='-1471.55' y='33.0267' name='Multithread_id_90'/>
+<aggregate idx='91' x='-1604.55' y='32.0267' inRAMAlgo='1' omitSuffix='1'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='L_RETURNFLAG_INDEX' type='0'/>
+   <v name='L_LINESTATUS_INDEX' type='0'/>
+  </GroupBy>
+  <OutputVars>
+   <v name='L_QUANTITY' sum='1'/>
+   <v name='L_EXTENDEDPRICE' sum='1'/>
+   <v name='DISC_PRICE' sum='1'/>
+   <v name='CHARGE' sum='1'/>
+   <v name='L_DISCOUNT' sum='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<Generic forceHDBuffering='1' idx='93' x='-2181.55' y='-63.9733' id='distribute'
+  longName='distribute evenly the rows between all output pins'
+  nPinOut='6'
+  isVariableNPinOut='1'
+  nPinOutMin='2'
+  image='/distribute.png'
+  author='Frank Vanden Berghen'
+  revision='0.02'
+  tags='500_Formatter'
+  pdfDestination='4_8_18_2_template'>
+<Description>
+distribute evenly the rows between all output pins
+</Description>
+<Parameters>
+  <Parameter id='idCol' text='column to forward' type='manycolumns'><meta>0</meta><data><c>filePath</c></data></Parameter>
+</Parameters>
+<Script>
+var mr;
+function parallelRun(v) { return false; }
+
+function init()
+{
+    var n=idCol.length;
+    var r=getCurrentRow();
+    if (!r.isNull) 
+    for(i=0;i&lt;nPinOut;i++)
+        setOutputRowSize(i,n);
+    mr=new Row(n);
+    for(j=0;j&lt;n;j++)
+        rowSetColumnName(mr,j,rowGetColumnName(r,idCol[j]));
+    return 0;
+}
+
+function run()
+{
+    var i,j,r,n=idCol.length;
+    for(i=0;i&lt;nPinOut;i++)
+    {
+        r=getNextRow();  
+        if (r.isNull) return 1;
+        j=n;
+        while(j--) mr.setColumn(j,r.col(idCol[j]));
+        mr.write(i); 
+        writeEOL(i);
+    }
+    return 0;
+}
+</Script>
+</Generic>
+<ReadColumnarGel module='MathParser' idx='94' x='-1992.55' y='149.027' fileNameFromPin='1' columnSelection='1' fileName='F:/TIMi/tpc-h/v2/TPC-H Anatella/10GB_anatella/lineitem_cgel_split/lineitem_1992-01-02.cgel_anatella'>
+ <ColumnsToRead>
+  <c>L_QUANTITY</c><c>L_EXTENDEDPRICE</c><c>L_DISCOUNT</c><c>L_TAX</c><c>L_SHIPDATE_ET</c><c>L_RETURNFLAG_INDEX</c><c>L_LINESTATUS_INDEX</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<FilterRows module='MathParser' idx='95' x='-1860.55' y='145.027'>
+ <Expression>L_SHIPDATE_ET  &lt;= DATE</Expression>
+ <InputVars>
+    <InputVar column='L_SHIPDATE_ET' meta='K'/>
+ </InputVars>
+</FilterRows>
+<aggregate idx='97' x='-1605.55' y='140.027' inRAMAlgo='1' omitSuffix='1'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='L_RETURNFLAG_INDEX' type='0'/>
+   <v name='L_LINESTATUS_INDEX' type='0'/>
+  </GroupBy>
+  <OutputVars>
+   <v name='L_QUANTITY' sum='1'/>
+   <v name='L_EXTENDEDPRICE' sum='1'/>
+   <v name='DISC_PRICE' sum='1'/>
+   <v name='CHARGE' sum='1'/>
+   <v name='L_DISCOUNT' sum='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<MultithreadRun idx='98' x='-1477.81' y='141.284' name='Multithread_id_90'/>
+<aggregate idx='100' x='-1113' y='-63' inRAMAlgo='1' omitSuffix='1'>
+ <OneAggregate>
+  <GroupBy>
+   <v name='L_RETURNFLAG_INDEX' type='0'/>
+   <v name='L_LINESTATUS_INDEX' type='0'/>
+  </GroupBy>
+  <OutputVars>
+   <v name='L_QUANTITY' sum='1'/>
+   <v name='L_EXTENDEDPRICE' sum='1'/>
+   <v name='DISC_PRICE' sum='1'/>
+   <v name='CHARGE' sum='1'/>
+   <v name='L_DISCOUNT' sum='1'/>
+   <v name='count' sum='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<Calculator module='MathParser' idx='102' x='-686.372' y='-61'>
+  <InputVars>
+    <InputVar column='count' meta='F'/>
+    <InputVar column='L_QUANTITY' meta='F'/>
+    <InputVar column='L_EXTENDEDPRICE' meta='F'/>
+    <InputVar column='DISC_PRICE' meta='F'/>
+    <InputVar column='CHARGE' meta='F'/>
+    <InputVar column='L_DISCOUNT' meta='F'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='AVG_QTY'>L_QUANTITY / count</OutputVar>
+    <OutputVar name='AVG_PRICE'>L_EXTENDEDPRICE / count</OutputVar>
+    <OutputVar name='AVG_DISC'>L_DISCOUNT /count *0.01</OutputVar>
+    <OutputVar name='DISC_PRICE' update='1'>DISC_PRICE *0.01</OutputVar>
+    <OutputVar name='CHARGE' update='1'>CHARGE *0.0001</OutputVar>
+  </OutputVars>
+</Calculator>
+<ReadColumnarGel module='MathParser' idx='103' x='-1986.47' y='249.418' fileNameFromPin='1' columnSelection='1' fileName='F:/TIMi/tpc-h/v2/TPC-H Anatella/10GB_anatella/lineitem_cgel_split/lineitem_1992-01-02.cgel_anatella'>
+ <ColumnsToRead>
+  <c>L_QUANTITY</c><c>L_EXTENDEDPRICE</c><c>L_DISCOUNT</c><c>L_TAX</c><c>L_SHIPDATE_ET</c><c>L_RETURNFLAG_INDEX</c><c>L_LINESTATUS_INDEX</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<FilterRows module='MathParser' idx='104' x='-1857.83' y='252.675'>
+ <Expression>L_SHIPDATE_ET  &lt;= DATE</Expression>
+ <InputVars>
+    <InputVar column='L_SHIPDATE_ET' meta='K'/>
+ </InputVars>
+</FilterRows>
+<aggregate idx='106' x='-1607.07' y='244.533' inRAMAlgo='1' omitSuffix='1'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='L_RETURNFLAG_INDEX' type='0'/>
+   <v name='L_LINESTATUS_INDEX' type='0'/>
+  </GroupBy>
+  <OutputVars>
+   <v name='L_QUANTITY' sum='1'/>
+   <v name='L_EXTENDEDPRICE' sum='1'/>
+   <v name='DISC_PRICE' sum='1'/>
+   <v name='CHARGE' sum='1'/>
+   <v name='L_DISCOUNT' sum='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<MultithreadRun idx='107' x='-1482.68' y='247.02' name='Multithread_id_90'/>
+<ReadColumnarGel module='MathParser' idx='108' x='-1983.12' y='351.059' fileNameFromPin='1' columnSelection='1' fileName='F:/TIMi/tpc-h/v2/TPC-H Anatella/10GB_anatella/lineitem_cgel_split/lineitem_1992-01-02.cgel_anatella'>
+ <ColumnsToRead>
+  <c>L_QUANTITY</c><c>L_EXTENDEDPRICE</c><c>L_DISCOUNT</c><c>L_TAX</c><c>L_SHIPDATE_ET</c><c>L_RETURNFLAG_INDEX</c><c>L_LINESTATUS_INDEX</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<FilterRows module='MathParser' idx='109' x='-1858.41' y='353.412'>
+ <Expression>L_SHIPDATE_ET  &lt;= DATE</Expression>
+ <InputVars>
+    <InputVar column='L_SHIPDATE_ET' meta='K'/>
+ </InputVars>
+</FilterRows>
+<aggregate idx='111' x='-1610.18' y='349.882' inRAMAlgo='1' omitSuffix='1'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='L_RETURNFLAG_INDEX' type='0'/>
+   <v name='L_LINESTATUS_INDEX' type='0'/>
+  </GroupBy>
+  <OutputVars>
+   <v name='L_QUANTITY' sum='1'/>
+   <v name='L_EXTENDEDPRICE' sum='1'/>
+   <v name='DISC_PRICE' sum='1'/>
+   <v name='CHARGE' sum='1'/>
+   <v name='L_DISCOUNT' sum='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<MultithreadRun idx='112' x='-1478.41' y='351.059' name='Multithread_id_90'/>
+<ReadColumnarGel module='MathParser' idx='113' x='-1981.94' y='442.824' fileNameFromPin='1' columnSelection='1' fileName='F:/TIMi/tpc-h/v2/TPC-H Anatella/10GB_anatella/lineitem_cgel_split/lineitem_1992-01-02.cgel_anatella'>
+ <ColumnsToRead>
+  <c>L_QUANTITY</c><c>L_EXTENDEDPRICE</c><c>L_DISCOUNT</c><c>L_TAX</c><c>L_SHIPDATE_ET</c><c>L_RETURNFLAG_INDEX</c><c>L_LINESTATUS_INDEX</c> </ColumnsToRead>
+ <CFilterRows >
+  <Expression>1</Expression>
+  <InputVars>
+  </InputVars>
+ </CFilterRows>
+</ReadColumnarGel>
+<FilterRows module='MathParser' idx='114' x='-1852.53' y='440.471'>
+ <Expression>L_SHIPDATE_ET  &lt;= DATE</Expression>
+ <InputVars>
+    <InputVar column='L_SHIPDATE_ET' meta='K'/>
+ </InputVars>
+</FilterRows>
+<aggregate idx='116' x='-1606.65' y='444' inRAMAlgo='1' omitSuffix='1'>
+ <OneAggregate counts='1'>
+  <GroupBy>
+   <v name='L_RETURNFLAG_INDEX' type='0'/>
+   <v name='L_LINESTATUS_INDEX' type='0'/>
+  </GroupBy>
+  <OutputVars>
+   <v name='L_QUANTITY' sum='1'/>
+   <v name='L_EXTENDEDPRICE' sum='1'/>
+   <v name='DISC_PRICE' sum='1'/>
+   <v name='CHARGE' sum='1'/>
+   <v name='L_DISCOUNT' sum='1'/>
+  </OutputVars>
+ </OneAggregate>
+</aggregate>
+<MultithreadRun idx='117' x='-1481.94' y='445.176' name='Multithread_id_90'/>
+<readCSV idx='118' x='-191.606' y='258.684' sep='|' fillInEOL='0' fileName=':/../../../answers/q1.out'/>
+<Calculator module='MathParser' idx='124' x='-1743' y='-61'>
+  <InputVars>
+    <InputVar column='L_EXTENDEDPRICE' meta='F'/>
+    <InputVar column='L_DISCOUNT' meta='K'/>
+    <InputVar column='L_TAX' meta='K'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='DISC_PRICE' isInput='1'>L_EXTENDEDPRICE * (100 -  L_DISCOUNT)</OutputVar>
+    <OutputVar name='CHARGE'>DISC_PRICE * (100  + L_TAX )</OutputVar>
+  </OutputVars>
+</Calculator>
+<Calculator module='MathParser' idx='137' x='-1740.92' y='41.9917'>
+  <InputVars>
+    <InputVar column='L_EXTENDEDPRICE' meta='F'/>
+    <InputVar column='L_DISCOUNT' meta='K'/>
+    <InputVar column='L_TAX' meta='K'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='DISC_PRICE' isInput='1'>L_EXTENDEDPRICE * (100 -  L_DISCOUNT)</OutputVar>
+    <OutputVar name='CHARGE'>DISC_PRICE * (100  + L_TAX )</OutputVar>
+  </OutputVars>
+</Calculator>
+<Calculator module='MathParser' idx='138' x='-1742.55' y='142.948'>
+  <InputVars>
+    <InputVar column='L_EXTENDEDPRICE' meta='F'/>
+    <InputVar column='L_DISCOUNT' meta='K'/>
+    <InputVar column='L_TAX' meta='K'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='DISC_PRICE' isInput='1'>L_EXTENDEDPRICE * (100 -  L_DISCOUNT)</OutputVar>
+    <OutputVar name='CHARGE'>DISC_PRICE * (100  + L_TAX )</OutputVar>
+  </OutputVars>
+</Calculator>
+<Calculator module='MathParser' idx='139' x='-1739.29' y='252.047'>
+  <InputVars>
+    <InputVar column='L_EXTENDEDPRICE' meta='F'/>
+    <InputVar column='L_DISCOUNT' meta='K'/>
+    <InputVar column='L_TAX' meta='K'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='DISC_PRICE' isInput='1'>L_EXTENDEDPRICE * (100 -  L_DISCOUNT)</OutputVar>
+    <OutputVar name='CHARGE'>DISC_PRICE * (100  + L_TAX )</OutputVar>
+  </OutputVars>
+</Calculator>
+<Calculator module='MathParser' idx='140' x='-1739.29' y='353.003'>
+  <InputVars>
+    <InputVar column='L_EXTENDEDPRICE' meta='F'/>
+    <InputVar column='L_DISCOUNT' meta='K'/>
+    <InputVar column='L_TAX' meta='K'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='DISC_PRICE' isInput='1'>L_EXTENDEDPRICE * (100 -  L_DISCOUNT)</OutputVar>
+    <OutputVar name='CHARGE'>DISC_PRICE * (100  + L_TAX )</OutputVar>
+  </OutputVars>
+</Calculator>
+<Calculator module='MathParser' idx='141' x='-1734.4' y='439.305'>
+  <InputVars>
+    <InputVar column='L_EXTENDEDPRICE' meta='F'/>
+    <InputVar column='L_DISCOUNT' meta='K'/>
+    <InputVar column='L_TAX' meta='K'/>
+  </InputVars>
+  <OutputVars>
+    <OutputVar name='DISC_PRICE' isInput='1'>L_EXTENDEDPRICE * (100 -  L_DISCOUNT)</OutputVar>
+    <OutputVar name='CHARGE'>DISC_PRICE * (100  + L_TAX )</OutputVar>
+  </OutputVars>
+</Calculator>
+<Generic idx='142' x='198.443' y='180.363' id='validate'
+  longName='validate'
+  nPinIn='2'
+  le='1496494323150'
+  image='validate.png'
+  author='Frank Vanden Berghen'
+  revision='0.23'
+  tags='200_Cleaning'
+  pdfDestination='5_6_3_table_validate'>
+<Description>
+&lt;html&gt;
+This operator compares the 2 tables given on the 2 input pins.&lt;br/&gt;
+Only the selected columns will be compared.&lt;br/&gt;
+&lt;br/&gt;
+The output of this operator is one unique row that contains: 
+&lt;ul&gt;
+&lt;li&gt;In the first column: the user-supplied &quot;short description&quot; of the performed test.&lt;/li&gt;
+&lt;li&gt;In the second column: 
+&lt;ul&gt;
+&lt;li&gt;If the comparison is successful (i.e. the selected columns of the 2 tables matches), then you obtain, the string &quot;OK&quot;.&lt;/li&gt;
+&lt;li&gt;If the comparison failed, then you obtain a short description of the &quot;mismatch&quot;.&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;
+&lt;/ul&gt;
+</Description>
+<Parameters>
+  <Parameter id='columnsToTestS' text='Columns to validate (Strings or Unknowns)' type='manycolumns'><meta>-1</meta><data></data></Parameter>
+  <Parameter id='columnsToTestN' text='Columns to validate (Numbers)' type='manycolumns'><meta>-1</meta><data><c>SUM_QTY</c><c>SUM_BASE_PRICE</c><c>SUM_DISC_PRICE</c><c>SUM_CHARGE</c><c>AVG_QTY</c><c>AVG_PRICE</c><c>AVG_DISC</c><c>COUNT_ORDER</c></data></Parameter>
+  <Parameter id='tn' text='Treshold when comparing 2 numbers' type='string'>1e-5</Parameter>
+  <Parameter id='testName' text='A short description of the test performed' type='string'>Comparison check ok</Parameter>
+  <Parameter id='idAbort' text='Abort execution on Error?' type='bool'>0</Parameter>
+  <Parameter id='idRelaxedNull' text='Treat NULL as the same as a Zero-Length String' type='bool'>1</Parameter>
+</Parameters>
+<Script>
+var nRow;
+var idxVarsRefN,idxVarsRefS;
+var idxVarsTestN,idxVarsTestS;
+
+function outputARow(message)
+{
+       if ((message!="OK")&amp;&amp;idAbort)
+       {
+            throw message;
+       }
+       var r=new Row(2);
+       rowSetColumnName(r,0,"Test Name");
+       rowSetColumnName(r,1,"Result");
+       r.setColumn(0,testName);
+       r.setColumn(1,message);
+       r.write();
+       writeEOL();
+}
+
+function init()
+{
+   if (columnsToTestN.length+columnsToTestS.length==0) throw("No Column to validate??");
+   nRow=1;
+   var r0=getCurrentRow(0);
+   var r1=getCurrentRow(1);
+   idxVarsRefN=rowGetIndexOfColumn(r0,columnsToTestN);
+   idxVarsTestN=rowGetIndexOfColumn(r1,columnsToTestN);
+   idxVarsRefS=rowGetIndexOfColumn(r0,columnsToTestS);
+   idxVarsTestS=rowGetIndexOfColumn(r1,columnsToTestS);
+   if (columnsToTestN.length>0)
+   {
+      if (idxVarsRefN.length==0) throw("''Number column'' not found in reference");
+      if (idxVarsTestN.length==0) throw("''Number column'' not found in test");
+   } else
+   {
+        idxVarsRefN=new Array();
+        idxVarsTestN=new Array();
+   }
+
+   if (columnsToTestS.length>0)
+   {
+        if (idxVarsRefS.length==0) throw("''String column'' not found in reference");
+        if (idxVarsTestS.length==0) throw("''String column'' not found in test");
+   }
+
+   var ii=idxVarsRefS.length;
+   while(ii--)
+   {
+       i=idxVarsRefS[ii];
+       if (rowGetMetaType(r0,i)=='F')
+       {
+            idxVarsRefN.push(i);
+            idxVarsTestN.push(idxVarsTestS[ii]);
+            idxVarsRefS.splice(ii,1);
+            idxVarsTestS.splice(ii,1);
+       }
+   }
+   setOutputRowSize(0,2);
+   tn=Number(tn);
+   return 0;
+}
+
+function run()
+{
+   var rRef=getNextRow(0);
+   var rTest=getNextRow(1);
+   if (rRef.isNull &amp;&amp; rTest.isNull)
+   {
+       outputARow("OK");
+       return 1;
+   }
+   if (rRef.isNull)
+   {
+       outputARow("ERROR: test table is to long (more than "+nRow+" rows");
+       return 1;
+   }
+   if (rTest.isNull)
+   {
+       outputARow("ERROR: test table is too short");
+       return 1;
+   }
+
+   var i,a,b,an,bn,ii;
+   for(i=0;i&lt;idxVarsRefS.length;i++)
+   {
+ //       cr=rRef.col(idxVarsRefS[i]);
+//       ct=rTest.col(idxVarsTestS[i]);
+//        if (!(cr==ct))
+        if (!(rRef.col(idxVarsRefS[i])==rTest.col(idxVarsTestS[i])))
+        {
+             if (idRelaxedNull)
+             {
+                    a=rRef.col(idxVarsRefS[i]);
+                    b=rTest.col(idxVarsTestS[i]);
+                    if (((a==null)&amp;&amp;(b==""))||((b==null)&amp;&amp;(a=="")))
+                        continue;
+             }
+             ii=idxVarsRefS[i];
+             a=rRef.col(idxVarsRefS[i]);
+             b=rTest.col(idxVarsTestS[i]);
+             outputARow("ERROR: Mismatch on row "+nRow+", col '"+rowGetColumnName(rRef,ii)+"': Ref= '"+a+"'(len="+(a==null?"n/a":a.length)+
+                          ") Test='"+b+"'(len="+(b==null?"n/a":b.length)+")");
+             return 1;
+        }
+   }
+   for(i=0;i&lt;idxVarsRefN.length;i++)
+   {
+        a=rRef.col(idxVarsRefN[i]);
+        b=rTest.col(idxVarsTestN[i]);
+        if (((a==null)&amp;&amp;(b!=null))||((b==null)&amp;&amp;(a!=null)))
+        {
+             if (idRelaxedNull)
+             {
+                    if (((a==null)&amp;&amp;(b==""))||((b==null)&amp;&amp;(a=="")))
+                        continue;
+             }
+             outputARow("ERROR: Mismatch on row "+nRow+", col '"+rowGetColumnName(rRef,ii)+"': Ref= '"+a+
+                          "' Test='"+b+"'");
+             return 1;
+        }
+        an=Number(a);
+        bn=Number(b);
+        if ((Math.abs(an-bn)/(1+Math.max(Math.abs(an),Math.abs(bn))))>tn)
+        {
+             ii=idxVarsRefN[i];
+             outputARow("ERROR: Mismatch on row "+nRow+", col '"+rowGetColumnName(rRef,ii)+"': Ref= '"+a+
+                          "' Test='"+b+"'");
+             return 1;
+        }
+   }
+   nRow++;
+   return 0;
+}
+</Script>
+</Generic>
+<ColumnRename module='DefaultActions' idx='143' x='-54.3816' y='264.532' caseMode='1'><before>
+</before><after>
+</after>
+<QuickRename ></QuickRename>
+</ColumnRename>
+<ChangeDataType idx='145' x='68.8812' y='259.957'>
+<toDouble><c>SUM_QTY</c><c>SUM_BASE_PRICE</c><c>SUM_DISC_PRICE</c><c>SUM_CHARGE</c><c>AVG_QTY</c><c>AVG_PRICE</c><c>AVG_DISC</c></toDouble>
+</ChangeDataType>
+<ChangeDataType idx='146' x='66.6274' y='156.285'>
+<toDouble><c>SUM_QTY</c><c>SUM_BASE_PRICE</c><c>SUM_DISC_PRICE</c><c>SUM_CHARGE</c><c>AVG_QTY</c><c>AVG_PRICE</c><c>AVG_DISC</c></toDouble>
+</ChangeDataType>
+</ACTIONS>
+<CONNECTORS>
+<Connection idxSrc='8' idxDest='4'/>
+<Connection idxSrc='14' idxDest='15'/>
+<Connection idxSrc='15' idxDest='3'/>
+<Connection idxSrc='16' idxDest='14'/>
+<Connection idxSrc='4' idxDest='23' idxPinIn='1'/>
+<Connection idxSrc='42' idxDest='16'/>
+<Connection idxSrc='68' idxDest='43'/>
+<Connection idxSrc='74' idxDest='68' idxPinIn='1'/>
+<Connection idxSrc='75' idxDest='68' idxPinIn='2'/>
+<Connection idxSrc='12' idxDest='42'/>
+<Connection idxSrc='76' idxDest='8'/>
+<Connection idxSrc='78' idxDest='6'/>
+<Connection idxSrc='85' idxDest='86'/>
+<Connection idxSrc='61' idxDest='89'/>
+<Connection idxSrc='91' idxDest='90'/>
+<Connection idxSrc='80' idxDest='93'/>
+<Connection idxSrc='93' idxDest='78'/>
+<Connection idxSrc='94' idxDest='95'/>
+<Connection idxSrc='97' idxDest='98'/>
+<Connection idxSrc='89' idxDest='100'/>
+<Connection idxSrc='43' idxDest='102'/>
+<Connection idxSrc='102' idxDest='12'/>
+<Connection idxSrc='100' idxDest='68'/>
+<Connection idxSrc='3' idxDest='23' idxPinIn='19'/>
+<Connection idxSrc='103' idxDest='104'/>
+<Connection idxSrc='106' idxDest='107'/>
+<Connection idxSrc='108' idxDest='109'/>
+<Connection idxSrc='111' idxDest='112'/>
+<Connection idxSrc='113' idxDest='114'/>
+<Connection idxSrc='116' idxDest='117'/>
+<Connection idxSrc='93' idxDest='85' idxPinOut='1'/>
+<Connection idxSrc='90' idxDest='89' idxPinIn='1'/>
+<Connection idxSrc='93' idxDest='94' idxPinOut='2'/>
+<Connection idxSrc='98' idxDest='89' idxPinIn='2'/>
+<Connection idxSrc='93' idxDest='103' idxPinOut='3'/>
+<Connection idxSrc='107' idxDest='89' idxPinIn='3'/>
+<Connection idxSrc='6' idxDest='77'/>
+<Connection idxSrc='93' idxDest='108' idxPinOut='4'/>
+<Connection idxSrc='93' idxDest='113' idxPinOut='5'/>
+<Connection idxSrc='112' idxDest='89' idxPinIn='4'/>
+<Connection idxSrc='117' idxDest='89' idxPinIn='5'/>
+<Connection idxSrc='6' idxDest='124'/>
+<Connection idxSrc='124' idxDest='61'/>
+<Connection idxSrc='86' idxDest='137'/>
+<Connection idxSrc='137' idxDest='91'/>
+<Connection idxSrc='95' idxDest='138'/>
+<Connection idxSrc='138' idxDest='97'/>
+<Connection idxSrc='104' idxDest='139'/>
+<Connection idxSrc='139' idxDest='106'/>
+<Connection idxSrc='109' idxDest='140'/>
+<Connection idxSrc='140' idxDest='111'/>
+<Connection idxSrc='114' idxDest='141'/>
+<Connection idxSrc='141' idxDest='116'/>
+<Connection idxSrc='118' idxDest='143'/>
+<Connection idxSrc='143' idxDest='145'/>
+<Connection idxSrc='145' idxDest='142' idxPinIn='1'/>
+<Connection idxSrc='2' idxDest='146'/>
+<Connection idxSrc='146' idxDest='142'/>
+</CONNECTORS>
+<TEXTANNOTATIONS>
+  <Annotation x='-1987.89' y='-114.265' size='16' anchor='78'>LINEITEM</Annotation>
+  <Annotation x='27.772' y='-175.63' size='16' bold='1'>Global parameters</Annotation>
+  <Annotation x='-70.4683' y='36.2833' size='16' bold='1'>Format results</Annotation>
+  <Annotation x='-1123.92' y='270.821' size='16' anchor='75'>RETURNFLAG</Annotation>
+  <Annotation x='-1125.33' y='124.941' size='16' anchor='74'>LINESTATUS</Annotation>
+</TEXTANNOTATIONS>
+<GROUPBOXANNOTATIONS>
+  <Groupbox x='-229.505' y='-307.525' w='490.128' h='177.488' color='#afeeee'/>
+  <Groupbox x='-301.692' y='-95.612' w='433.137' h='184.002' color='#d8bfd8'/>
+</GROUPBOXANNOTATIONS>
+</ANATELLA>

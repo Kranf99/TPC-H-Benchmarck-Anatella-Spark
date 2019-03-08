@@ -1,0 +1,6 @@
+Opening Anatella graph 'C:/projects/TPC-H-Benchmarck-Anatella-Spark-/TPC-H Anatella/queries/q17/q17.anatella' with login='anonymous'
+Global Parameter: DATA_SIZE=100
+Global Parameter: BRAND=23
+Global Parameter: CONTAINER=36
+Running... (7/1/19 20:20:46)
+Success! (finished at 7/1/19 20:21:19 after 32.54 seconds - Peak Memory Consumption~ 70 MB)
