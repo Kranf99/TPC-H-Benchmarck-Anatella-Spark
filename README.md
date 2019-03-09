@@ -18,7 +18,7 @@ The total price of this server is less than 3K€.
 The workload
 ============
 We run the 22 queries from the TPC-H on 4 different database sizes: 1GB, 10GB, 100GB, 1TB.
-The main timing results originates from the 100GB database.
+The timing results used to compute the Spark incompressible times "s" originate from the executions on the 100GB database.
 
 The data is stored inside .parquet files (for Spark) and .gel files (for TIMi). All the files are stored on a SSD drive (i.e. storing data on HDFS causes a huge speed penalty for Spark). We executed all queries in a non-interactive session (“as if” the queries were running during the night). This makes a big difference for Anatella since Anatella possesses an “interactive” mode that allows near instantaneous computation of the most complex queries (thanks to a unique advanced data-cache system).
 
