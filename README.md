@@ -2,7 +2,7 @@ TPC-H-Benchmarck-Anatella-Spark
 
 Speed comparison between Anatella and Spark.
 
-From the time measurements, it appears that Spark is not able to parallelize very well (i.e. it's incomressible runtime "s" is high). These results are confirmed by many independent researchers in the field: For example: The scientific paper named “Amdahl’s Law in Big Data Analytics: Alive and Kicking in TPCx-BB (BigBench)” also displays the same incompressible runtimes (between 20% and 50%). This makes the whole Spark system nearly unusable since the major Spark promise (i.e. horizontal scalability: to deliver higher-speed on a larger infrastructure) is not achieved.
+From the time measurements, it appears that Spark is not able to parallelize very well (i.e. it's incompressible runtime "s" is high). These results are confirmed by many independent researchers in the field: For example: The scientific paper named “Amdahl’s Law in Big Data Analytics: Alive and Kicking in TPCx-BB (BigBench)” also displays the comparable incompressible runtimes (between 20% and 50%). This makes the whole Spark system nearly unusable since the major Spark promise (i.e. horizontal scalability: to deliver higher-speed on a larger infrastructure) is not achieved. This is not a particular problem from Spark "per se" since most distributed/parallel computation engine exhibit the same behavior.
 
 In other words: We observed that, for each TPC-H query, the total Anatella runtime is largely below the Spark incompressible time (we are cheking that with the script "compute_incompressible_time_s_v2.anatella"). This leads to the conclusion that Anatella has already finished all computations since a long time while Spark is still busy trying to complete its initialization/incompressible phase. 
 
