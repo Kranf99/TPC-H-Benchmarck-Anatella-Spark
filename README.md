@@ -26,9 +26,9 @@ Feel free to double-check yourself the results.
 
 The results
 ===========
-An anlysis of the numerical results obtained on the TPC/H benchmarck is available here:
+An analysis of the numerical results obtained on the TPC/H benchmarck is available here:
 * White paper:           http://download.timi.eu/docs/Spark_vs_TIMi_technical_white_paper.pdf
-* summary for CEO:       http://download.timi.eu/docs/Spark_vs_TIMi_Executive_Summary.pdf
-* pptx presentation:     http://download.timi.eu/docs/TIMi_vs_Spark.pdf
+* Summary for CEO:       http://download.timi.eu/docs/Spark_vs_TIMi_Executive_Summary.pdf
+* Pptx presentation:     http://download.timi.eu/docs/TIMi_vs_Spark.pdf
 
 
