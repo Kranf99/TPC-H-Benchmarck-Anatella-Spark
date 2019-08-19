@@ -23,3 +23,12 @@ The timing results used to compute the Spark incompressible times "s" originate 
 The data is stored inside .parquet files (for Spark) and .gel files (for TIMi). All the files are stored on a SSD drive (i.e. storing data on HDFS causes a huge speed penalty for Spark). We executed all queries in a non-interactive session (“as if” the queries were running during the night). This makes a big difference for Anatella since Anatella possesses an “interactive” mode that allows near instantaneous computation of the most complex queries (thanks to a unique advanced data-cache system).
 
 Feel free to double-check yourself the results.
+
+The results
+===========
+An anlysis of the numerical results obtained on the TPC/H benchmarck is available here:
+* White paper:           http://download.timi.eu/docs/Spark_vs_TIMi_technical_white_paper.pdf
+* summary for CEO:       http://download.timi.eu/docs/Spark_vs_TIMi_Executive_Summary.pdf
+* pptx presentation:     http://download.timi.eu/docs/TIMi_vs_Spark.pdf
+
+
