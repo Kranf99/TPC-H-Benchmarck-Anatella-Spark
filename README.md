@@ -1,20 +1,21 @@
-TPC-H-Benchmarck-Anatella-Spark
+TPC-H Benchmarck Anatella Spark
 ===============================
-Speed comparison between Anatella and Spark.
+Speed comparison between Anatella and Hadoop/Spark.
 Both tools are compared in their latest release on the 2019/2.
 
 The results
 ===========
 An analysis of the numerical results obtained on the TPC/H benchmarck is available here:
-* White paper:           http://download.timi.eu/docs/Spark_vs_TIMi_technical_white_paper.pdf
-* Summary for CEO:       http://download.timi.eu/docs/Spark_vs_TIMi_Executive_Summary.pdf
-* Pptx presentation:     http://download.timi.eu/docs/TIMi_vs_Spark.pdf
+* White paper:         http://download.timi.eu/docs/Spark_vs_TIMi_technical_white_paper.pdf
+* Summary for CEO:     http://download.timi.eu/docs/Spark_vs_TIMi_Executive_Summary.pdf
+* Pptx presentation:   http://download.timi.eu/docs/TIMi_vs_Spark.pdf
+* Fun Youtube video:   https://www.youtube.com/watch?v=rgITj1N6wBo
 
 Summary
 =======
-From the time measurements, it appears that Spark is not able to parallelize very well (i.e. it's incompressible runtime "s" is high). These results are confirmed by many independent researchers in the field: For example: The scientific paper named “Amdahl’s Law in Big Data Analytics: Alive and Kicking in TPCx-BB (BigBench)” also displays comparable incompressible runtimes (between 20% and 50%). This makes the whole Spark system nearly unusable since the major Spark promise (i.e. horizontal scalability: to deliver higher-speed on a larger infrastructure) is not achieved. This is not a particular problem from Spark "per se" since most distributed/parallel computation engines exhibit the same behavior that is perfectly explained by the Amdahl's Law (although the problem is quite visible in the case of Spark).
+From the time measurements, it appears that Hadoop/Spark is not able to parallelize very well (i.e. it's incompressible runtime "s" is high). These results are confirmed by many independent researchers in the field: For example: The scientific paper named “Amdahl’s Law in Big Data Analytics: Alive and Kicking in TPCx-BB (BigBench)” also displays comparable incompressible runtimes (between 20% and 50%). This makes the whole Hadoop/Spark system nearly unusable since the major Hadoop/Spark promise (i.e. horizontal scalability: to deliver higher-speed on a larger infrastructure) is not achieved. This is not a particular problem from Hadoop/Spark "per se" since most distributed/parallel computation engines exhibit the same behavior that is perfectly explained by the Amdahl's Law (although the problem is quite visible in the case of Spark).
 
-In other words: We observed that, for each TPC-H query, the total Anatella runtime is largely below the Spark incompressible time (we are cheking that with the script "compute_incompressible_time_s_v2.anatella"). This leads to the conclusion that Anatella has already finished all computations since a long time while Spark is still busy trying to complete its initialization/incompressible phase. 
+In other words: We observed that, for each TPC-H query, the total Anatella runtime is largely below the Hadoop/Spark incompressible time (we are cheking that with the script "compute_incompressible_time_s_v2.anatella"). This leads to the conclusion that Anatella has already finished all computations since a long time while Hadoop/Spark is still busy trying to complete its initialization/incompressible phase. 
 
 The Hardware
 ============
