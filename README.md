@@ -6,9 +6,9 @@ Both tools are compared in their latest release on the 2019/2.
 The results
 ===========
 An analysis of the numerical results obtained on the TPC/H benchmarck is available here:
-* White paper:         http://download.timi.eu/docs/Spark_vs_TIMi_technical_white_paper.pdf
-* Summary for CEO:     http://download.timi.eu/docs/Spark_vs_TIMi_Executive_Summary.pdf
-* Pptx presentation:   http://download.timi.eu/docs/TIMi_vs_Spark.pdf
+* White paper:         https://download.timi.eu/docs/Spark_vs_TIMi_technical_white_paper.pdf
+* Summary for CEO:     https://download.timi.eu/docs/Spark_vs_TIMi_Executive_Summary.pdf
+* Pptx presentation:   https://download.timi.eu/docs/TIMi_vs_Spark.pdf
 * Fun Youtube video:   https://www.youtube.com/watch?v=rgITj1N6wBo  (subtitles in French and English)
 
 Summary
